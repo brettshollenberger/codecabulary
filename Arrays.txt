@@ -34,3 +34,4 @@
 		
 		# Now you've got a mess of nils
 		
+### Array Methods
