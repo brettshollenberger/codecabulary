@@ -1,0 +1,22 @@
+#Hashes
+
+#### Prefer symbols to strings in hashes. In fact, never use mutable objects as hash keys.
+
+		# no zen
+		hash = { 'one' => 1, 'two' => 2' } 
+		
+		#zen
+		hash = { one: 1, two: 2 } 
+		
+####Prefer literal arrays & hash creation, unless you need to pass parameters to their constructors.
+
+
+		# no bueno
+		hash = Hash.new
+		arr = Array.new
+		
+		#bueno
+		hash = {}
+		arr = []
+
+

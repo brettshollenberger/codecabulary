@@ -1,0 +1,8 @@
+Homepage:
+	http://www.notational.net/
+
+Development:
+	https://github.com/scrod/nv/wiki/
+
+Contact:
+	Zachary Schneirov <scrod@notational.net>
