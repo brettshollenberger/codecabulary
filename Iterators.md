@@ -14,3 +14,4 @@
 		array.each do |item|		# Ruby
 			print item
 		end
+		
