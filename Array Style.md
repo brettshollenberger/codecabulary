@@ -34,16 +34,5 @@
 		
 		# Now you've got a mess of nils
 		
-# Array Methods
-
-#### Array.each_with_index 
-
-		a = [10, 5, 2, 1]
-		a.each_with_index { |value, index| puts "#{ value } is at index #{ index } }
-		
-		>> 10 is at index 0
-		>> 5 is at index 1
-		>> 2 is at index 2
-		>> 1 is at index 3
 		
 
