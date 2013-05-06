@@ -45,7 +45,7 @@
 		> In the block
 		> End of method
 		
-#### The method and block can have more of a conversation with one another by passing parameters:
+#### The method and block can have more of a conversation (coroutines) with one another by passing parameters:
 
 		def param_pass
 			yield('Bert', 'Hola')
