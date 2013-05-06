@@ -108,6 +108,21 @@
 
 		c.delete(1)
 		>> [2, 3]
+		
+#### Array.compact -- Returns an array without nil values; not in place
+
+		arr = ['a', 1, 'b', 2, nil, nil, 3, nil, 'happy']
+		arr.compact
+		>> ['a', 1, 'b', 2, 3, 'happy']
+		arr
+		>> ['a', 1, 'b', 2, nil, nil, 3, nil, 'happy'] 	# Compact is not performed in-place
+
+#### Exclamation point performs method in-place
+
+		arr.compact!
+		>> ['a', 1, 'b', 2, 3, 'happy']
+		arr
+		>> ['a', 1, 'b', 2, 3, 'happy']
 
 #### Array.each_with_index 
 
