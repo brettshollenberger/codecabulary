@@ -6,7 +6,7 @@
 		hash = Hash.new
 		arr = Array.new
 		
-		#bueno
+		# bueno
 		hash = {}
 		arr = []
 
