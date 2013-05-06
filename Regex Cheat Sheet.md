@@ -57,7 +57,7 @@
 		\w
 		
 #### Any non-word character:
-ˇ
+
 		\W
 		
 #### Any word boundary:
