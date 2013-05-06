@@ -6,7 +6,7 @@
 #### As of 1.9, hashes are ordered. 
 
 
-#### Prefer symbols to strings in hashes. In fact, never use mutable objects as hash keys.
+#### Prefer symbols to strings as hash keys. In fact, never use mutable objects as hash keys.
 
 		# no zen
 		hash = { 'one' => 1, 'two' => 2, 'three' => 3 } 
