@@ -18,11 +18,15 @@
 		
 #### Line starts with:
 
-		^
+		^		# Match URLs starting with blog: /^blog/
 		
 #### Line ends with:
 
-		$
+		$ 		# Match URLs ending with /$blog/
+		
+#### Any word boundary:
+
+		\b 		# Effectively implied. Match URLs containing. /\bblog\b/ is the same as /blog/.
 		
 #### Start of string:
 
@@ -59,10 +63,6 @@
 #### Any non-word character:
 
 		\W
-		
-#### Any word boundary:
-
-		\b
 		
 #### Capture everything enclosed:
 
