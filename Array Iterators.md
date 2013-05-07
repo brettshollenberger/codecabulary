@@ -29,7 +29,36 @@ Like all classes that include the Enumerator module, Array has an each method wh
 		>> [2, 3, 4]
 		a
 		>> [2, 3, 4]
+		
+#### Non-destructive selection: Array.select, Array.reject, Array.drop_while
 
+		a = [1, 2, 3, 4, 5, 6]
+		a.select { |num| num > 3 }
+		>> [4, 5, 6]
+		
+		a.reject { |num| num < 4 }
+		>> [4, 5, 6]
+		
+		a.drop_while { |num| num < 4 }
+		>> [4, 5, 6]
+		
+#### Destructive selection:
+
+		a.select! { |num| num > 3 }
+		>> [4, 5, 6]
+		
+		a.reject! { |num| num < 4 }
+		>> [4, 5, 6]
+		
+		a.delete_if { |num| num < 4 }
+		>> [4, 5, 6]
+		
+		a.keep_if { |num| num > 3 }
+		>> [4, 5, 6]
+		
+		a
+		>> [4, 5, 6]
+		
 #### Array.each_with_index 
 
 		a = [10, 5, 2, 1]
