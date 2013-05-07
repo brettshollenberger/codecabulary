@@ -123,13 +123,13 @@
 		>> ['a', 1, 'b', 2, 3, 'happy']
 		arr
 		>> ['a', 1, 'b', 2, 3, 'happy']
-
-#### Array.each_with_index 
-
-		a = [10, 5, 2, 1]
-		a.each_with_index { |value, index| puts "#{ value } is at index #{ index } }
 		
-		>> 10 is at index 0
-		>> 5 is at index 1
-		>> 2 is at index 2
-		>> 1 is at index 3
+#### To remove duplicates in an array, there's the non-destructive Array.uniq and the destructive Array.uniq!
+
+		a = [1, 1, 2, 3, 3]
+		a.uniq					# Modification not in-place
+		>> [1, 2, 3]
+		a
+		>> [1, 1, 2, 3, 3]
+		a.uniq!					# Performs modification in-place
+		>> [1, 2, 3]
