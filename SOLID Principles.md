@@ -13,3 +13,9 @@ If properties of the abstracted class need to be compared or organized together,
 #### _Liskov Substitution_
 
 Functions that point to or reference a base class must be able to use objects of derived classes without knowing it. 
+
+#### _Dependency Inversion Principle_
+Depend on abstractions, not on concretions. High-level modules should not depend on low-level modules. Both should depend upon abstractions. Abstractions should not depend upon details. Details should depend upon abstractions. 
+
+#### _Interface Segregation Principle_
+Clients should not be forced to depend upon interfaces they do not use. "When a client depends on a class that contains interface that they don't use, but that other clients do use, then that client will be affected by the changes those other clients force upon the class."
