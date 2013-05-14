@@ -13,3 +13,11 @@
 
 		heroku create --stack cedar
 		git push heroku master
+		
+#### Pushing
+
+		git push heroku
+		
+#### Checking Logs
+
+		heroku logs

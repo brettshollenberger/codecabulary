@@ -8,4 +8,10 @@ As in Python, it would make sense to include head data, header & nav, and footer
 
 		<% ... %>		# Executes code
 		<%= ... %> 		# Executes and inserts into template
+		
+#### Public directory:
+
+Files in the public directory are served directly to the browser (not rendered). The default, static index.html page lives here.
+
+Files in the public directory never hit the main Rails stack; they are delivered directly from the filesystem.
 
