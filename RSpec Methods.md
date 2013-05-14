@@ -1,5 +1,7 @@
 # RSpec Methods
 
+>The RSpec sentence is: "DESCRIBE AnObject: IT "does something we humans can understand;" EXPECT it to function in that way by demonstrating x. 
+
 #### Require a module in the same path
 		require_relative "module_name"
 		
