@@ -1,5 +1,8 @@
 # Rails Anatomy
 
+#### Viewing a page
+When visiting a URI, it matches a pattern in the Rails router, which maps to the appropriate controller, executes the appropriate action, and renders the view corresponding to the action.
+
 #### Layout file: app/views/layouts/application.html.erb (Embedded Ruby)
 
 The layout file is like Python's base.htm: It's the "frame" where new content will fit into. 

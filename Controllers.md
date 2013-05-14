@@ -26,3 +26,6 @@ Controllers are a way to bundle Rails _actions_ related by a common purpose.
 		def help
 		end
 		
+#### To the browser, raw HTML is indistinguishable from HTML delivered via the controller/action method: All the browser ever sees is HTML.
+
+
