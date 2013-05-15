@@ -4,7 +4,7 @@
 * Follow the instructions on the [Heroku help page](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup)
 * As a Mac user, I really only care about me: [Download Postgres.app](http://postgresapp.com). 
 * [Documentation](http://postgresapp.com/documentation) is obviously helpful, but here are the important steps:
-* Add the Postgres bin to your path (e.g. via the .profile, .bashrc, .zshrc, or whatever you use to make sure it gets set for every Terminal session). 
+* Add the Postgres bin to your path (e.g. via the .profile, .bashrc, .zshrc, or whatever you use to make sure it gets set for every Terminal session). Ensures you get to use the binaries that ship with Postgres like ``pg_dump`` and ``pg_restore``
 		
 		### For Postgres
 		export PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
