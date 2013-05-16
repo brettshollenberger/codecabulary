@@ -14,7 +14,7 @@ This wiki tries to solve those problems by: 1) Providing plain-English explanati
 
 This wiki is not a guide (yet). There isn't a path for reading it (yet). Today, as in, on the day you are reading it, it is meant to define terms that sound foreign and to provide their context.
 
-As of today, this Wiki accomplishes its context task self-referentially. It is the goal of each topic page to explain its topic in detail, and provide links to all topics it relies on to make its point. Some links will take you away from this wiki (to Google) because I've identified them as jargon, but haven't had a chance to define them yet. You shouldn't keep reading if you don't understand a word that I haven't yet defined--you should Google it. That link is my not-so-subtle cue to you to stop if it's not making sense. Trust me, you want to understand what you're reading.
+As of today, this Wiki accomplishes its context task self-referentially. It is the goal of each topic page to explain its topic in detail, and provide links to all topics it relies on to make its point. Some links will take you away from this wiki (to Google) because I've identified them as jargon, but haven't had a chance to define them yet. You shouldn't keep reading if you don't understand a word that I haven't yet defined--you should Google it. That link is my not-so-subtle cue to you to stop if it's not making sense.
 
 If you'd like me to prioritize a particular term, please email it to me at brett.shollenberger@gmail.com. 
 
