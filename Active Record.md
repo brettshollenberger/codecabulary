@@ -6,7 +6,7 @@ Active Record contains a class (named base), which classes in Rails models subcl
 
 		rails generate model User username:string password:string
 		
-Creates a file named user.rb in the app/models folder of the [Rails root](http://www.google.com). By default, this is the generated file:
+Creates a file named user.rb in the app/models folder of the [Rails root](https://github.com/brettshollenberger/ruby_wiki/blob/master/Rails%20Root.md). By default, this is the generated file:
 
 		# The file inherits from ActiveRecord's base class
 		class User < ActiveRecord::Base				  
