@@ -12,7 +12,7 @@ Let's examine [ThoughtBot's GitHub account](https://github.com/thoughtbot) to se
 
 * Examples of How Tos, Style Guides, and Examples:
 	* [Guide to Programming in Style](https://github.com/thoughtbot/guides)
-	* [Example of Agile Development through a Heroku App (as part of a webinar](https://github.com/thoughtbot/webinar)
+	* [Example of Agile Development through a Heroku App (as part of a webinar](https://github.com/thoughtbot/webinar))
 * Examples of Libraries, Gems, and Bootstrappers:
 	* [Bourbon: A Mixin Library for Sass](https://github.com/thoughtbot/bourbon)
 	* [Dotfiles](https://github.com/thoughtbot/dotfiles)
