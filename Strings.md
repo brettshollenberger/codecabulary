@@ -2,15 +2,15 @@
 
 #### Prefer interpolation over concatenation.
 
-		# Goods
+		# Good
 		"Something #{ Sarah } said."
 		
-		# Bads
+		# Bad
 		"Something " + Sarah + " said."
 		
 #### Prefer String#<< over String#+
 		
-		# So taste
+		# Good
 		hello = 'hello'
 		hello << ' world'
 		#> 'hello world'

@@ -2,7 +2,7 @@
 
 > Every reference to a symbol takes up the same space, so using symbols for hash keys, links, and routes is always much more efficient than using strings as keys. 
 
-#### Like integers, which always have the same object ID in a given program, symbols maintain the same unique ID throughout each instance. 
+Like integers, which always have the same [object ID](http://google.com) in a given program, symbols maintain the same object ID throughout a program. 
 		
 		# Strings as hash keys use multiple object IDs, and therefore more memory.
 		patient1 = { 'ruby' => 'red' }
