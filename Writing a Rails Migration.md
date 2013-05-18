@@ -18,6 +18,12 @@ For example:
 
 Like generating a model, Rails will generate a few files for you when generating a migration. The first is the migration file itself, located in `db/migrate`, which in this case would be named `YYYYMMDDHHMMSS_change_username_field_to_email`. Check here for more info on [Migration Naming Conventions](https://github.com/brettshollenberger/ruby_wiki/blob/master/Naming%20Migrations.md).
 
+ProTip: If the migration name you write in this step is of the form “AddXXXToYYY” or “RemoveXXXFromYYY” and is followed by a list of column names and types then a migration containing the appropriate add_column and remove_column statements will be created for you (otherwise the next step in the process). Bada-bing.
+
+Example:
+
+		rails generate migration AddPartNumberToProducts part_number:string
+
 #### 2) Write the Up & Down Methods or Change Method in the Migration file
 
 The migration file will already be written for us, and will start with this line:
