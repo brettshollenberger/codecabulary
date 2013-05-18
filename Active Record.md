@@ -1,6 +1,6 @@
 # Active Record
 
-Apps generally contain three types of things: The stuff the user sees (the view), the saved information (the model), and the logic that delivers the right information to the right user (the controller) (Read more on the [Model-View-Controller Pattern](http://google.com)). 
+Apps generally contain three types of things: The page the user sees (the view), the saved information (the model), and the logic that delivers the right information to the right user (the controller) (Read more on the [Model-View-Controller Pattern](http://google.com)). 
 
 Active Record is a part of [Rails](http://google.com) that standardizes and simplifies many common tasks involved in working with a part of the model layer--databases. 
 
