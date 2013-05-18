@@ -48,6 +48,17 @@ If we were writing a [constructive migration](http://google.com) like adding a c
 		
 How did we know what the names of these methods were? Simple, check [Migration Methods](https://github.com/brettshollenberger/ruby_wiki/blob/master/Migration%20Methods.md) for a complete list of methods we can use to change our database schema.
 
+How did we know whether to use `change` or `up`/`down`? `up`/`down` is going to be the safest bet in all cases (today), but there's also a list of the methods `change` supports:
+
+	•	add_column
+	•	add_index
+	•	add_timestamps
+	•	create_table
+	•	remove_timestamps
+	•	rename_column
+	•	rename_index
+	•	rename_table
+
 #### 3) Run the Migration File
 
 The migration is almost complete. Back in the command line, in the Rails root, we'll run:
