@@ -56,6 +56,5 @@ Options include: :unique, and :order
 			change_column :table, :column, :old_type, :old_options
 		end
 		
-#### 
 
 
