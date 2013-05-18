@@ -14,3 +14,13 @@ For example, to generate a migration for
 To write one, start by defining a class whose name describes the change it affects on the database:
 
 		class CreateProducts < ActiveRecord::Migration
+		
+If we had a _destructive_ or _change-oriented_ migration, like drop_table or change_column, we would have wanted to name this method "up" instead of "change." 
+
+		def up
+			change_column :users, :username, :email
+		end
+
+		def down
+  			change_column :users, :email, :username
+		end

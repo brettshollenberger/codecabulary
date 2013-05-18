@@ -41,17 +41,31 @@ Let's break this down:
 
 The first line says: Create a class called "CreateUsers" that [inherits](http://google.com) its functionality from Active Record's Migration class. That line's already a doozy, but here's the breakdown's breakdown: The Migrations class in Active Record contains helper methods that perform CRUD operations, like add_table, add_column, and rename_table. These are the types of things we our class (CreateUsers) to do, so it inherits those methods, giving our class the ability to perform them. 
 
-The second line says, create a [method](http://google.com) called "change." The method name is [convention](http://googe.com) in Rails for [constructive migrations](http://google.com)--aka migrations that _add_ something to a database (in this case we're adding a whole table, but add_column and add_index are also constructive migrations). Since writing a Rails model will always be a constructive migration, we won't explore the other options in this article; check out [Writing a Rails Migration] for details on convention for destructive or change-oriented migrations.
+The second line says, create a [method](http://google.com) called "change." The method name is [convention](http://google.com) in Rails for [constructive migrations](http://google.com)--aka migrations that _add_ something to a database (in this case we're adding a whole table, but add_column and add_index are also constructive migrations). Since writing a Rails model will always be a constructive migration, we won't explore the other options in this article; check out [Writing a Rails Migration](https://github.com/brettshollenberger/ruby_wiki/blob/master/Writing%20a%20Rails%20Migration.md) for details on convention for destructive or change-oriented migrations.
 
-If we had a _destructive_ or _change-oriented_ migration, like drop_table or change_column, we would have wanted to name this method "up" instead of "change." 
+The next lines describe the changes we want to make--we create the table called users (note the pluralization of the name we gave it, since it describes multiple _users_), and add columns called :username, :password. Active Record will also automatically add the timestamps columns created_at and updated_at (and it will also keep track of these for us as we add records to the table). Finally, an auto-incrementing [primary key](http://google.com) named id will be added by default, so we don't need to describe it.
 
-		def up
-			change_column :users, :username, :email
+With this file already created for us, we can run (back in the command line)
+
+		rake db:migrate
+		
+To create the table and update the schema. 
+
+2) Second is the model file: `app/models/user.rb`. 
+
+By default, the file Rails generates for us is:
+
+		class User < ActiveRecord::Base
+  			attr_accessible :password, :username
 		end
+		
+Again, let's break the file down:
 
-		def down
-  			change_column :users, :email, :username
-		end
+The file creates a User class, which as we described at the beginning of this article, is a Model class. This class is the object we'll use to perform CRUD operations on the database--it's the thing we really wanted to create to make our lives easier.
+
+Like CreateUsers, which inherited from Active Record's Migration class, Users inherits functionality from an Active Record class: Base. Base is at the heart of Active Record: it has all the functionality for querying the database, writing to it, deleting from it, timestamping, persistence, validations--and tons of other goodies. By inheriting from Base, we've already transformed User into a rather powerful class capable of creating and destroying worlds (as long as they exist within the users table). 
+
+
  
 
 
