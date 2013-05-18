@@ -13,6 +13,6 @@
 	* Keeps everyone's `db/schema.db` up-to-date (file path relative to the Rails root).
 * Since migrations are tracked chronologically, when you're ready to update your production code, running `rake db:migrate` will run all the migrations in the same order they were run on the development server: leaving you with an up-to-date database. Try saying that five times fast. 
 
-The only step left for you take care of is to update the [Model class](http://google.com) associated with the changes you made to the schema (making sure you follow the [Migration Naming Convention](
+The only step left for you take care of is to update the [Model class](http://google.com) associated with the changes you made to the schema (making sure you follow the [Migration Naming Convention](https://github.com/brettshollenberger/ruby_wiki/blob/master/Naming%20Migrations.md).
 
 Click here to learn about [writing a Rails migration](http://www.google.com).
