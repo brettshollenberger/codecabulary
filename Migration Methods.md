@@ -47,6 +47,16 @@ E.g.:
 
 		add column :users, :username, :string, options: { null: false, limit: 30 } # A default value could be added, but it wouldn't make sense to have a default username.
 		
+#### Rename Column
+
+		def up
+			rename_column :table, :old_column_name, :new_column_name
+		end
+		
+		def down
+			rename_column :table, :new_column_name, :old_column_name
+		end
+		
 #### Add/Remove Index:
 
 Despite the id index that exists by default for each record, you may want to add indices to columns that are frequently searched in large tables to improve search speed. 
