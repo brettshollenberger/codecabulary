@@ -1,6 +1,6 @@
 # Rails Model Associations
 
-#### 1-to-1 Associations:
+#### One-to-One Associations:
 
 The difference between `belongs_to` and `has_one` is a semantic one. The model that declares `belongs_to` includes a column containing the foreign key of the other. The model that declares `has_one` has its foreign key referenced. 
 
@@ -24,11 +24,17 @@ The difference between `belongs_to` and `has_one` is a semantic one. The model t
 
 If you're finding it difficult to recall which is which (they're saying the same thing, right?), remember that _you_ know who your heart _belongs to_, but if you _have one_ secret admirer, only they know about the relationship. Creepy. 
 
-#### 1-to-Many Associations
+`has_one :through`
+
+Suppliers have one account, and accounts have one account history. By the transitive property, suppliers have one account history. 
+
+![Illustration of a has_one :through relationship](http://guides.rubyonrails.org/images/has_one_through.png)
+
+#### One-to-Many Associations
 
 `has_many`
 
-Following the same `has`-styled relationship of `has_one`, the class that declares `has_many` is referenced by many objects that `belong_to` it. 
+Following the same `has`-styled relationship of `has_one` and `has_one :through`, the class that declares `has_many` is referenced by many objects that `belong_to` it. 
 
 Justin Bieber `has_many` fans, who `belong_to` him. _They_ keep his foreign key (aka poster on the wall), and he doesn't know they exist.  
 
@@ -67,4 +73,10 @@ Via this nested association, `has_many :through`, Rails can now make sense of th
 Now Rails recognizes:
 
 		physicians.patients
+		
+`has_and_belongs_to_many`
+
+A `has_and_belongs_to_many` relationship is common of networks--both real and digital. Doctors have many patients and those patients may have many doctors. Facebook accounts have many friends and belong to many friends lists. 
+
+![Illustration of a has_and_belongs_to_many relationship](http://guides.rubyonrails.org/images/habtm.png)
 		
