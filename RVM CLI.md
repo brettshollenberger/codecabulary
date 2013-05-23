@@ -10,4 +10,4 @@ The pointer will show you which gemset you're in. To switch gemsets, use:
 		
 To create a new gemset, type:
 
-		rvm 
+		rvm gemset create gemset_name
