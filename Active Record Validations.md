@@ -13,7 +13,7 @@ Rails developers most often place their validations at the top of their models (
 			
 #### The Big Bad List of Rails Validations
 
-This list, and additional information, is available via the [Rails Guides](http://guides.rubyonrails.org/active_record_validations_callbacks.html). Here, we've included additional clarification where necessary. 
+This list, and additional information, is available via the [Rails Guides](http://guides.rubyonrails.org/active_record_validations_callbacks.html). This section of the Wiki is a direct copy of the source available at the Rails Guides, and will evolve into our standard style and approach as we have time to complete it.
 
 `validates :acceptance`
 

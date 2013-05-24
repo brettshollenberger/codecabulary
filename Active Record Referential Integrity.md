@@ -19,4 +19,4 @@ Like anything which operates at the application level, these cannot guarantee re
 
 Although Active Record does not provide any tools for working directly with such features, the execute method can be used to execute arbitrary SQL. You could also use some plugin like foreigner which adds foreign key support to Active Record (including support for dumping foreign keys in db/schema.rb).
 
-Click here for the Big Bad Super List of [Active Record Model Validations](http://google.com), which will get you started validating the Rails way. 
+Click here for the Big Bad Super List of [Active Record Model Validations](https://github.com/brettshollenberger/ruby_wiki/blob/master/Active%20Record%20Validations.md), which will get you started validating the Rails way. 
