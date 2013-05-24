@@ -1,12 +1,12 @@
 # Active Record
 
-Apps generally contain three types of things: The page the user sees (the view), the saved information (the model), and the logic that delivers the right information to the right user (the controller) (Read more on the [Model-View-Controller Pattern](http://google.com)). 
+Apps generally contain three types of things: The page the user sees (the view), the saved information (the model), and the logic that delivers the right information to the right user (the controller) (Read more on the [Model-View-Controller Pattern](https://github.com/brettshollenberger/ruby_wiki/blob/master/Model%20View%20Controller%20Pattern.md)). 
 
 Active Record is a part of [Rails](http://google.com) that standardizes and simplifies many common tasks involved in working with a part of the model layer--databases. 
 
 In order to use the standardized methods that Active Record provides for working with databases, you'll have to make sure your model classes subclass a class defined in the Active Record library named "Base" (since it's the _base_ for your model). 
 
-By default, Rails will make sure your model classes get the subclassing right if you use the `rails generate model` command to create your model. For example, once you have a [new Rails app](http://google.com), you can enter the command line, [cd](http://www.google.com) into the [Rails root](http://www.google.com), and type:
+By default, Rails will make sure your model classes get the subclassing right if you use the `rails generate model` command to create your model. For example, once you have a [new Rails app](http://google.com), you can enter the command line, [cd](http://www.google.com) into the [Rails root](https://github.com/brettshollenberger/ruby_wiki/blob/master/Rails%20Root.md), and type:
 
 		rails generate model User username:string password:string
 		
