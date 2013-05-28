@@ -1,40 +1,69 @@
 # RSpec Methods
 
->The RSpec sentence is: "DESCRIBE AnObject: IT "does something we humans can understand;" EXPECT it TO function in that way by demonstrating x.
+The RSpec sentence is: 
 
->Alternately, IT SHOULD function in a certain way. 
+		describe AnObject do
+			it "does something we humans can understand;"
+			expect(AnObject).to prove_this_somehow
 
-		expect(page).to have_content('Sample App')		# is the same as
-		page.should have_content('Sample App')			# but expect is more expressive
+RSpec's older style of expression uses _should_ instead of _expect_. For example, the following are equivalent:
 
-#### Require a module in the same path
-		require_relative "module_name"
+		expect(1).to eql(1)		# is the same as
+		1.should eql(1)			# but expect is more expressive
 		
-Equivalent to:
+To write an RSpec test unit, start with a describe block:
 
-		require "./module_name"
-		
-#### Describe statements
+#### Describe blocks
 
 		describe PrimeFactorization do
 		
 All statements under such a header will describe functionality related to a particular object. In this case, it describes instances of the class PrimeFactorization.
 
-Describe statements are merely a means of organization. They can be named anything, but should be named after their objects. Associated functionality should test functionality on only that object.
+Describe statements are a means of organization. They can be named anything, but are usually named after the objects they describe, with the object's public functionality being tested in the block.
 
-#### It statements
+#### Before(:each) statements
 
-		it 'returns the prime factors of 2' do
-		
-Everything under the it statement will test whether or not the object functions as expected. For instance:
+Describe blocks will have many it blocks underneath them; each it block describes a particular function of the object being described.
+
+Often, to test functionality of an object, we'll start with many of the same methods, such as instantiating the object and customizing it. 
+
+If we're finding our it blocks repeating themselves, we can DRY out our code by moving these statements up to the before(:each) block, which will be run before each it block as its name implies. 
+
+		before(:each) do
+			prime_factorization = PrimeFactorization.new
+		end
+
+Now the prime_factorization instance is available to all of our it blocks. 
+
+#### It blocks
+
+	it 'returns the prime factors of 2 if given 2 as an argument' do
+		expect(prime_factorization.prime_pairs(2)).to eql([[1, 2]])
+	end
+
+Now that we have an instance of the object we want to test, we'll test each of its [public methods](google.com) in it blocks.
+
+The it statement starts again with a human-readable description: prime_pairs is a method that returns the prime factors of 2 if given 2 as an argument. Our it blocks don't have to be quite this literal, but they do serve as documentation of the methods we intend to be public for our class. 
+
+Although the article on public methods goes into further depth on what public methods are, we should state here that public methods are the methods for your objects that you are publicly stating other developers can rely on. If another dev wants to use or extend your class, your specs will act as a contract with them that states "You may use these methods and be certain that the results you obtain through them will not change, although the way that the method achieves this result may change at any time."
+
+Testing only public methods allows you the flexibility to refactor your code whenever you want. So it's very important, as you're learning to write industry-ready tests that you learn which methods should be public and which shouldn't. The public methods article offers an introductory discussion that is best followed up by reading [Sandi Metz' Practical Object-Oriented Design in Ruby](http://www.amazon.com/Practical-Object-Oriented-Design-Ruby-Addison-Wesley/dp/0321721330/ref=sr_1_1?ie=UTF8&qid=1369765590&sr=8-1&keywords=sandi+metz).
 
 #### Expect statements
 
-		expect(PrimeFactorization.new(2).list).to eql([2])
-		
-#### Let function - creates a variable corresponding to its argument
+Expect statements are where you define how a test will pass. In the prime_pairs example above, we said that the prime_pairs method would work if the prime pairs of two were returned as an array of arrays--but it only returned the single array [1, 2] within another array. 
 
-	let(:base_title) { "Ruby on Rails Tutorial Sample App" }
-	...
-	expect(page).to have_selector('title', "#{ base_title } | Contact")
+Another dev might guess, since we've stated this is how we expect prime_pairs to function in our test, that prime_pairs returns an array of arrays because it will usually return more than one set of pairs. But we should be more explicit about how we expect prime_pairs to function by fleshing out the method with additional examples so other developers know how we expect it to work in different circumstances.
+
+		it "returns the prime factors of 4 if given 4 as an argument" do
+			expect(prime_factorization.prime_pairs(4)).to eql([[1, 4], [2, 2]])
+		end
+		
+That's probably how the other dev expected it would work, but now they know. We can also add our edge cases and cases in which prime_pairs receives arguments that will trip it up (aka the "non-happy path", being that we often call the "happy path" the path where a user does everything as we expect them to). Since we know users won't, we ought to display how prime_pairs will behave under other circumstances so other devs know what to expect. 
+
+Expect statements offer a wide range of possibilities for testing--not just equality testing. For a list of RSpec methods (which are primarily expect methods), check out [RSpec Methods.](google.com)
+
+
+		
+		
 		
