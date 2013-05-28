@@ -33,4 +33,4 @@ Where app is the name of the app.rb file. Now your spec file is linked to your a
 
 		bundle
 		
-To download RSpec and get moving. Next in your course of action, you'll check out [Writing Specs in RSpec]()
+To download RSpec and get moving. Next in your course of action, we recommend you check out [Writing Specs in RSpec](https://github.com/brettshollenberger/ruby_wiki/blob/master/Writing%20Specs%20in%20RSpec.md), and then move on to [RSpec Methods](https://github.com/brettshollenberger/ruby_wiki/blob/master/RSpec%20Methods.md).
