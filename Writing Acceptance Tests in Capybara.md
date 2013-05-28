@@ -31,3 +31,4 @@ Using the Capybara acceptance testing language allows us to assert that the Capy
 
 Being that the Acceptance Testing DSL is really just an extension of (and in many ways aliasing of) the RSpec language, readers can get a more detailed look at writing acceptance tests in [Writing Specs in RSpec](https://github.com/brettshollenberger/ruby_wiki/blob/master/Writing%20Specs%20in%20RSpec.md).
 
+For a more detailed look at Capybara, check out the [Capybara Cheet Sheet](https://github.com/brettshollenberger/ruby_wiki/blob/master/Capybara%20Cheat%20Sheet.md).
