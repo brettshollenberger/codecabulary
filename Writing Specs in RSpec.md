@@ -1,12 +1,18 @@
 # Writing Specs in RSpec
 
-The RSpec sentence is: 
+RSpec is used to write [unit tests](google.com), which focus on the granular details of software. 
+
+If acceptance tests tend to focus on features in a program ("I can sign into the program"), the unit tests will focus on the details, of which there are likely many more ("I can sign into a program if I provide all the correct credentials"; "I can't sign in if my user name is already taken;" etc.). 
+
+RSpec is a [Domain-Specific Language (DSL)](google.com) for describing the behavior a developer _expects_ to see under given _circumstances_, and each test sets up the circumstances and declares the expected outcome. If the outcome is different from the expectation, the developer sees an error, signaling them that they need to refactor their code. 
+
+An example RSpec sentence reads:
 
 		describe AnObject do
 			it "does something we humans can understand;"
 			expect(AnObject).to prove_this_somehow
 
-RSpec's older style of expression uses _should_ instead of _expect_. For example, the following are equivalent:
+RSpec also has an older style of sentence (which is not yet deprecated), which uses _should_ instead of _expect_. For example, the following are equivalent:
 
 		expect(1).to eql(1)		# is the same as
 		1.should eql(1)			# but expect is more expressive
