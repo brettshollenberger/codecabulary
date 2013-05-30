@@ -1,14 +1,14 @@
 # Partials
 
-Partials are reusable snippets of Rails view code.
+Partials are reusable snippets of Rails view code, meaning you can use them to DRY it out.
 
 #### Install the Rails Partials Package for Sublime Text 2
 
 1) Press command shift P
 
-2) Install Package
+2) Select Install Package
 
-3) Rails Partials
+3) Select Rails Partials
 
 #### Create a Partial
 
@@ -40,9 +40,7 @@ Partials are reusable snippets of Rails view code.
 		<td><%= event.name %></td>
 		<td><%= event.location %></td>
 		
-3) Make it a partial (Alt P, name it)
-
-		In this case, I named it "event"
+3) Make it a partial (Alt P, name it). In this case, I named it "event."
 
 4) Change the render line to a hash including the collection option:
 
