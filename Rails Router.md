@@ -20,6 +20,8 @@ If the URL to match and controller/action combination are the same, you can simp
 		
 Which will map http://localhost:3000/static_pages/contact to the contact action in the static_pages controller. 
 
+> URLs are matched in the order they are declared. The router will direct the request to the first controller the request matches.
+
 _The Root Route_
 
 To match the root ("/", "http://localhost:3000/," or "yoursite.com"), use:
