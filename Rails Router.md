@@ -33,7 +33,7 @@ Which maps the root to the index action in the static_pages controller.
 _Resourceful Routes_
 
 | HTTP Verb | CRUD     | Path            | Action | Used To                                                    |
-| --------------  |:------------:|:---------------:|:--------:| ------------------------------------------------------:|
+| --------------  |:------------:|:---------------:|:--------:| :------------------------------------------------------|
 | GET            | Retrieve | /users         | index  | Display a list of all users                            |
 | GET            | Retrieve | /users/new | new     | Return an HTML form for creating a user |
 | POST          | Create   | /users         | create | Create a user                                            |
