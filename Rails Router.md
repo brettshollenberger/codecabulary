@@ -30,6 +30,19 @@ To match the root ("/", "http://localhost:3000/," or "yoursite.com"), use:
 		
 Which maps the root to the index action in the static_pages controller.
 
+_Resourceful Routes_
+
+| HTTP Verb	 | CRUD	|Path     	        | Action  	| Used To |
+| --		------- |:-----------:|-------------------:|------------:|-------------:|
+| GET           	| Retrieve 	| /users		| index	| Display a list of all users |
+| GET      		| Retrieve	| /users/show	| new	| Return an HTML form for creating a user |
+| POST  		| Create   	| /users		| create	| Create a user |
+| GET 		| Retrieve 	| /users/:id		| show	| Display a specific user |
+| GET  		| Retrieve 	| /users/:id/edit	| edit		| Return an HTML form for editing a user |
+| PUT  		| Update   	| /users/:id		| update	| Update a specific user |
+| DELETE  	| Destroy  	| /users/:id		| destroy	| Delete a specific user |
+
+
 ##Path and URL Generation
 
 _Named Routes_
