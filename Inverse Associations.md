@@ -1,4 +1,16 @@
-Consider the following association: [gist id=5625024] Now, imagine you did:
+Consider the following association: 
+
+    class CrazyCatLady < ActiveRecord::Base
+      has_many :cats
+    end
+    
+    class Cat < ActiveRecord::Base
+      belongs_to :crazy_cat_lady
+    end
+
+[gist id=5625024] 
+
+Now, imagine you did:
 
     CrazyCatLady.first.cats.first
 
@@ -8,7 +20,20 @@ OK, this will query the database for the first CrazyCatLady, then query again fo
 
 Aside from being a bit silly, this does everything the first statement does, then queries the database a third time to find the CrazyCatLady associated with the first cat. But Rails already has this information! *Why* is it querying the database again?
 
-Rails is a bit dumb about the inverse of an association. You have to specify that an inverse relationship exists, like so: [gist id=5688873] With this done, when we issue:
+Rails is a bit dumb about the inverse of an association. You have to specify that an inverse relationship exists, like so: 
+
+    class CrazyCatLady < ActiveRecord::Base
+      has_many  :cats,
+                inverse_of: :crazy_cat_lady
+    end
+     
+    class Cat < ActiveRecord::Base
+      belongs_to  :crazy_cat_lady,
+                  inverse_of: :cats
+    end
+[gist id=5688873] 
+
+With this done, when we issue:
 
     CrazyCatLady.first.cats.first.crazy_cat_lady
 
