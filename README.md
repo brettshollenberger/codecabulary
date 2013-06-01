@@ -21,3 +21,5 @@ If you'd like me to prioritize a particular term, please email it to me at brett
 Cheers,
 Brett
 
+Contributors: [Michael Raimondi (chronophasiac)](https://github.com/chronophasiac)
+
