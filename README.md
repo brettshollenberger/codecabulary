@@ -20,7 +20,7 @@ If you'd like me to prioritize a particular term, please email it to me at brett
 
 Cheers,
 
-[Brett Shollenberger](https://github.com/brettshollenberger)
+Brett
 
-Contributors: [Michael Raimondi (chronophasiac)](https://github.com/chronophasiac), [Frank Weber (fweber2)](https://github.com/fhweber2)
+Contributors: [Brett Shollenberger (brettshollenberger)](https://github.com/brettshollenberger), [Michael Raimondi (chronophasiac)](https://github.com/chronophasiac), [Frank Weber (fweber2)](https://github.com/fhweber2)
 
