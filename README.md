@@ -22,5 +22,5 @@ Cheers,
 
 [Brett Shollenberger](https://github.com/brettshollenberger)
 
-Contributors: [Michael Raimondi (chronophasiac)](https://github.com/chronophasiac)
+Contributors: [Michael Raimondi (chronophasiac)](https://github.com/chronophasiac), [Frank Weber (fweber2)](https://github.com/fhweber2)
 
