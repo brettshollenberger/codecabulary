@@ -19,7 +19,7 @@ As of today, this Wiki accomplishes its context task self-referentially. It is t
 If you'd like me to prioritize a particular term, please email it to me at brett.shollenberger@gmail.com. 
 
 Cheers,
-Brett
+[Brett Shollenberger](https://github.com/brettshollenberger)
 
 Contributors: [Michael Raimondi (chronophasiac)](https://github.com/chronophasiac)
 
