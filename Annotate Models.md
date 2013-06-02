@@ -29,3 +29,5 @@ To create these annotations:
 2) In Terminal:
 
 	bundle exec annotate --position before
+	
+3) Run annotate any time your model changes to keep the annotations up-to-date
