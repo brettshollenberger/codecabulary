@@ -12,7 +12,7 @@ Since most applications have these three basic needs, developers tend to separat
 
 MVC illustrates an overarching concept in programming: [convention over configuration](google.com), the principle that common structural concerns should follow a common structural patterns, the way sentences abide grammatical rules (and when they don't, you end up with [Finnegan's Wake](http://en.wikipedia.org/wiki/Finnegans_Wake)). 
 
-#### The Flow of Information in the MVC Pattern
+#### The Flow of Information in the MVC Pattern in Rails
 
 The MVC pattern has the cobenefit of making it much easier to learn Rails (or Django or whatever) because each piece of the program can be learned about separately. Below, let's take a look at how all the pieces interact:
 

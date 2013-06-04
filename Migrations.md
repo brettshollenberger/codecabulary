@@ -15,4 +15,4 @@
 
 The only step left for you take care of is to update the [Model class](http://google.com) associated with the changes you made to the schema (making sure you follow the [Migration Naming Convention](https://github.com/brettshollenberger/ruby_wiki/blob/master/Naming%20Migrations.md).
 
-Click here to learn about [writing a Rails migration](http://www.google.com).
+Click here to learn about [writing a Rails migration](https://github.com/brettshollenberger/ruby_wiki/blob/master/Writing%20a%20Rails%20Migration.md).

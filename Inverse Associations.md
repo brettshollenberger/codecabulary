@@ -1,3 +1,5 @@
+#Inverse Associations
+
 Consider the following association: 
 
     class CrazyCatLady < ActiveRecord::Base

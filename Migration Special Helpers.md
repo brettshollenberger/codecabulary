@@ -18,7 +18,7 @@ Similarly:
 
 Adds those columns to an existing table. 
 
-#### Add a references or belongs_to column
+#### Add references or belongs_to column
 
 		create_table :products do |t|
 		  t.references :category

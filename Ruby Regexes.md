@@ -1,5 +1,7 @@
 # Ruby Regexes
 
+Regular Expressions are patterns often used to ensure user input matches specific criteria (e.g. to ensure a user has entered a valid email address). 
+
 #### Patterns in Ruby are specified using _/pattern/_
 
 		/Perl|Python/ # Perl or Python
@@ -24,4 +26,4 @@
 			puts "Logged in."
 		end
 		
-		> Logged in.
+Check out the [Regex Cheat Sheet](https://github.com/brettshollenberger/ruby_wiki/blob/master/Regex%20Cheat%20Sheet.md) for more info on regular expressions. 

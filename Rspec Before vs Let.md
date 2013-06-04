@@ -2,9 +2,13 @@
 
 In RSpec, there are two ways to DRY up tests (before and let) that share an intersecting purpose: to create variables that are common across tests. For common variable instantiation, the Ruby community prefers _let_, and while _before_ is often used to perform actions common across tests, the purpose of this article is to explore the differences between before and let for common variable creation in order to explain why let is preferred. 
 
-#### before creates instance variables; let variables are lazily evaluated
+#### before creates instance variables; let creates lazily-evaluated local variables
 
-Let variables don't exist until called into existence by the actual tests, so you won't waste time loading them for examples that don't use them. Let variables are memoized when used multiple times in one example, but not across examples.
+Let variables don't exist until called into existence by the actual tests, so you won't waste time loading them for examples that don't use them. They're also memoized, so they're useful for encapsulating database objects, due to the cost of making a database request. 
+
+	let(:valid_user) { User.find_by_email(email) } # Let queries the database once, and then saves the valid_user object locally
+	
+	before { @valid_user = User.find_by_email(email) } # Before queries the database before each spec. 
 
 Before statements are run _before each test_, and increase load times. When you are going to `visit root_path` before a number of tests anyway, a before statement makes sense: you'd be calling the visit method the same number of times and before DRYs up your tests. For variables, you end up using more processing power unnecessarily.
 

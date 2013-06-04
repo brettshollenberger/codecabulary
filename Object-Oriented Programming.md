@@ -1,6 +1,6 @@
 #Object-Oriented Programming
 
-Object-oriented programming is much like 18th and 19th century Western history: Primarily concerned with taxonomy. Contemporaries of Erasumus Darwin (Charles' grandfather), up through Charles' own cohort, spent their time codifying the tiny worlds under the microscope, the massive worlds through the telescope, the innumerable varieties of finches and far-away never-before-seens, the vast multiplicities of human sexuality, and anything else they classify, systemify, and otherwise nail down in a neat little box.
+Object-oriented programming is much like 18th and 19th century Western history: Primarily concerned with taxonomy. Contemporaries of Erasumus Darwin (Charles' grandfather), up through Charles' own cohort, spent their time codifying the tiny worlds under the microscope, the massive worlds through the telescope, the innumerable varieties of finches and far-away never-before-seens, the vast multiplicities of human sexuality, and anything else they could classify, systemify, and otherwise nail down in a neat little box.
 
 OOP differs from this codification in purpose: Where the Victorian sexologist sought to understand the geography of perversion, developers seek to create the rules so as to simplify their process (it's the difference between trying to understand the natural order and creating that order).
 

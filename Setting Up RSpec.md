@@ -39,7 +39,7 @@ To download RSpec and get moving.
 * In the Gemfile, add:
 
 		group :development, :test do
-			gem 'rspec-rails', '2.9.0'
+			gem 'rspec-rails'
 		end
 		
 * The development mode RSpec files add RSpec-specific generators
