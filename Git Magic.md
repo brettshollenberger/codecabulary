@@ -1,4 +1,3 @@
-# Git Magic
 
 
 #### Stage new and removed files for deletion

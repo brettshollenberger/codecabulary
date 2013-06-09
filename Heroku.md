@@ -18,8 +18,12 @@
 		
 #### Pushing
 
-		git push heroku
+		git push heroku master
 		
 #### Checking Logs
 
 		heroku logs
+		
+#### Accessing Rails Console via Heroku
+
+	heroku run rails c
