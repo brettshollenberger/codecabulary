@@ -22,5 +22,5 @@ Cheers,
 
 Brett
 
-Contributors: [Brett Shollenberger (brettshollenberger)](https://github.com/brettshollenberger), [Michael Raimondi (chronophasiac)](https://github.com/chronophasiac), [Connor Smith (https://github.com/x3igh7)], (https://github.com/x3igh7) [Frank Weber (fweber2)](https://github.com/fhweber2)
+Contributors: [Brett Shollenberger (brettshollenberger)](https://github.com/brettshollenberger), [Michael Raimondi (chronophasiac)](https://github.com/chronophasiac), [Connor Smith (https://github.com/x3igh7)] (https://github.com/x3igh7), [Frank Weber (fweber2)](https://github.com/fhweber2)
 
