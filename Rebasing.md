@@ -26,7 +26,7 @@ You might rebase to ensure commits apply easily on a remote branch, when it's a 
 
 #### When Not to Use Rebase
 
-You absolutely shouldn't rebase if you have already pushed those commits to a public repository.
+You absolutely shouldn't rebase if you have already pushed the commits you would be rewriting to a public repository.
 
 Others may have pulled the commits down already and begun working with them. If you rebase after that, your team member will end up with something like the image below:
 

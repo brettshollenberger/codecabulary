@@ -1,5 +1,11 @@
 # Heroku
 
+1) Heroku uses Postgres databases, so include the `pg` gem or the argument `database=postgresql` when setting up your app
+
+	rails new app_name --database=postgresql
+	
+2) In your home directory, ensure your `.gitignore_global` contains 
+
 * To deploy to Heroku, include the PostgreSQL gem:
 
 		group :production do

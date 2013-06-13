@@ -38,11 +38,15 @@ In the example above, we see that the shortnames are the names of the contributo
 
 When you've reached a good stopping point (say you've finished a feature), you can share your additions with the rest of the team by pushing upstream to the remote repository. 
 
-	git push [remote-name] [branch-name]
+	$ git push <remote> <local branch name>:<remote branch to push into>
 	
-A fairly common command is therefore:
+For example, if you wanted to push the local master branch to the remote master branch, you could type:
 
-	git push origin master
+	$ git push origin master:master
+	
+Or simply:
+
+	$ git push origin master
 	
 #### Inspect a Remote Repo
 
