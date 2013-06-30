@@ -1,6 +1,6 @@
 #State Machines
 
-State machines represents a very big and complex topic in the world of computer science; navigating to the state machine gem's ReadMe file can make grown men cry. But state machines don't have to the be that complicated!
+State machines represent a very big and complex topic in the world of computer science; navigating to the state machine gem's ReadMe file can make grown men cry. But state machines don't have to the be that complicated!
 
 Take a simple example of moderating a comment for a blog post. The user is able to flag an inappropriate comment. That causes the comment to appear in a review section for the site admin. The site admin then decides whether he or she wishes to approve or remove the comment. Only approved comments are shown. 
 
