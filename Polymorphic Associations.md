@@ -17,21 +17,22 @@ In this example, I've also added a `user_id`, since we'll only want a user to be
 * The like `belongs_to` both a `likeable` and a `user`. In the case of the `likeable`, we'll need to pass in the `:polymorphic => :true` option to declare the polymorphism.
 * Finally, to allow a single user to like a single thing only once, we'll validate uniqueness of the user_id, within the scope of the likeable (defined by the 	`likeable_id` and `likeable_type`). In this slightly more complex take on the uniqueness/scoped validation, we'll need to use an array to pass multiple arguments to scope to.
 
-	class Like < ActiveRecord::Base
-	  attr_accessible :user, :likeable
+
+		class Like < ActiveRecord::Base
+	  		attr_accessible :user, :likeable
 	
-	  validates :user, :likable,  {
-	    presence: true
-	  }
+		  	validates :user, :likable,  {
+		    	presence: true
+		  	}
+		
+		 	 belongs_to :likeable, :polymorphic => true
+		
+		  	belongs_to :user
+		
+		  	validates_uniqueness_of :user_id, :scope => [:likeable_id, :likeable_type]
 	
-	  belongs_to :likeable, :polymorphic => true
-	
-	  belongs_to :user
-	
-	  validates_uniqueness_of :user_id, :scope => [:likeable_id, :likeable_type]
-	
-	end
-	
+		end
+		
 3) In our router, we'll need to nest the `likes` resource under anything that will be likeable in order for us to create those paths:
 
 	resources :comments do
