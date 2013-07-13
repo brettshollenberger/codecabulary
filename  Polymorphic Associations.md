@@ -42,6 +42,8 @@ In this example, I've also added a `user_id`, since we'll only want a user to be
 		resources :likes
 	end
 	
+Run `rake routes` to check out the routes created by these nested resource statements. They'll take the form of `top_level_resource/:top_level_id/nested_resource/nested_id`
+	
 3.1) If you have nested resources, you can handle them in a similar fashion, although you should never nest resources deeper than two levels (as in this example): 
 
 	resources :status_updates do
@@ -128,5 +130,7 @@ And example controller for `The Nested Resource` would look like:
 	    end
 	end
 	
-5) In your views, you'll 
+5) In your views, you'll just add a reference to the create action for your likes nested beneath the proper top-level resource. A given page may have many likeable entities--comments, status updates, photos, etc--so the top-level resource will be the differentiator:
+
+	<%= link_to "Like", new_like_path(@comment, @like) %>
 
