@@ -6,7 +6,7 @@
 
 It's hard to start programming. Programming itself is easy. It's the starting that's hard. 
 
-I want to make the starting easy. When I started, I read books and articles. I went to events. I took classes. I took the fancy web 2.0 classes and I did the code challenges, and the online videos, and the koans in such and such a language. And most of it was hard or bad. 
+I wanted to make the starting easy. When I started, I read books and articles. I went to events. I took classes. I took the fancy web 2.0 classes and I did the code challenges, and the online videos, and the koans in such and such a language. And most of it was hard or bad. 
 
 Most of it is hard or bad for two reasons: 1) Too much jargon and 2) Too little context. 
 
