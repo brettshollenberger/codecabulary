@@ -1,6 +1,6 @@
 # Backbone Models
 
-Backbone models hold application data and logic around that data, as in Rails.
+Backbone models hold application data and logic around that data, as in Rails. As in other languages, Backbone models declare a framework for our data.
 
 #### Model Creation:
 
