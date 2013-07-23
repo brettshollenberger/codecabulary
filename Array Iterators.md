@@ -59,7 +59,7 @@ Like all classes that include the Enumerator module, Array has an each method wh
 		a
 		>> [4, 5, 6]
 		
-#### Array.each_with_index 
+#### Array.each_with_index
 
 		a = [10, 5, 2, 1]
 		a.each_with_index { |value, index| puts "#{ value } is at index #{ index } }
