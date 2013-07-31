@@ -100,9 +100,9 @@ Now it's finally time to write some Backbone! Let's get started:
 		
 #### The app.js file:
 		
-10) So what are the responsibilities of this high-level `app.'s.coffee` file? 
+10) So what are the responsibilities of this high-level `app.js.coffee` file? 
 
-* Establish an IIFE -- an immediately-invoked function object -- to perform setup of the Marionette.Application object and hand it back to the DemoApp variable. IIFEs ensure that all setup gets handled as soon as the function expression is evaluated and then it's never run again. Precisely the right type of function to perform setup. 
+* Establish an IIFE -- an immediately-invoked function expression -- to perform setup of the Marionette.Application object and hand it back to the DemoApp variable. IIFEs ensure that all setup gets handled as soon as the function expression is evaluated and then it's never run again. Precisely the right type of function to perform setup. 
 
 * Add region objects to the DemoApp that correspond to the jQuery selectors for the regions we established in `application/index.html.erb`. This way we can update these regions dynamically throughout the rest of the application.
 * Tap into the `initialize:after` event to start Backbone.history. Backbone.history uses (what else?) the HTML History API to track hash change events and build up a savable _state_ of our application. This API is particularly useful in SPAs, where a user might build a shopping cart, and wish to share the cart with a family member; tacking these hash change events onto the URI, and handling for them in our application's API will allow our user to work with our application in predictable, and savable ways. Click here for a sweet introduction to the [History API](http://diveintohtml5.info/history.html). 
@@ -137,11 +137,11 @@ So that's the way we'll build each piece of our application. The header, footer,
 			> apps
 				> footer
 					- footer_app.js.coffee
-				> show
-					- show_controller.js.coffee
-					- show_view.js.coffee
-				> templates
-					- show.js.eco
+					> show
+						- show_controller.js.coffee
+						- show_view.js.coffee
+					> templates
+						- show.js.eco
 					
 #### Organize Yourself
 
@@ -158,12 +158,97 @@ The organization I offered above follows two rules:
 
 * Define the module
 * Define an API to interact with the world at large
+* Define lifecycle events for the app to respond to
 
-	@Demo.module "FooterApp", (FooterApp, App, Backbone, Marionette, $, _) ->
-		API =
-			showFooter: ->
-				FooterApp.Show.Controller.showFooter()
+		@Demo.module "FooterApp", (FooterApp, App, Backbone, Marionette, $, _) ->
+			API =
+				showFooter: ->
+					FooterApp.Show.Controller.showFooter()
+					
+			FooterApp.on "start", ->
+				API.showFooter()
 				
+Here we've achieved a simple version of all three responsibilities--we've set up our FooterApp to respond to `start` events by calling the showFooter() method on the API, which calls the show controller's showFooter() method. 
+
+Note the namespacing of the Controller module--underneath Show and not the other way around (as in Rails). This arrangement is just one possible organization among many, but one that allows us to organize each app's folder structure into RESTful actions and views. Naturally, we'll assume the Show.Controller will only implement a show controller action, and an Index.Controller will only implement an index controller action. 
+
+So when does the "start" action get called on a module? By default, all modules namespaced under our main `app.js.coffee` will be called when we call `Demo.start()`, but this is not very explicit or expressive for newcomers to our codebase. One way to call out the default behavior is to first silence it in our modules:
+
+	@startWithParent = false
+	
+In the context of the module, `this` refers to the module itself, so `this.startWithParent = false` tells our module not to start when the `Demo.start()` action is called. Instead, we can tap into the initialization process of `app.js.coffee` to make this call directly:
+
+	App.addInitializer ->
+		App.module("FooterApp").start()
+		
+Now, if you were following the thread of the application initialization, it would be much more obvious what was going on.
+
+14) Implement the `Show.Controller.showFooter()` action:
+
+	Demo.module "FooterApp.Show", (Show, App, Backbone, Marionette, $, _) ->
+		Show.Controller = 
+			
+			showFooter: ->
+				footerView = @getFooterView()
+				App.footerRegion.show footerView
+				
+			getFooterView: ->
+				new Show.Footer
+				
+Here we define a module namespaced under FooterApp called "Show", and we're explicitly defining a module under that--Controller. The Show.Controller module features the showFooter method implementation that we call in the FooterApp's showFooter method, and it calls the getFooterView method to instantiate a new Show.Footer view. It then loads the view into the app's footerRegion object that we previously mapped to the "footer-region" div in our `application.html.erb` file. 
+
+15) Next we need to declare that Show.Footer view module:
+
+`show_view.js.coffee`
+	
+	Demo.module "FooterApp.Show", (Show, App, Backbone, Marionette, $, _) ->
+		
+		class Show.Footer extends Marionette.ItemView
+			template: JST["path/to/template"]
+			
+16) Since we've previously declared that we'll use Embedded CoffeeScript (eco) for templating, now we need to include it in our Gemfile:
+
+	group :assets do
+		gem 'eco'
+	end
+	
+17) In order to set a default template path for our templates, we can create a `config` file for Marionette:
+
+	> backbone
+		> config
+			> marionette
+				- renderer.js.coffee
+				
+Renderer is a class inside of Marionette that we'll be overriding, so we'll namespace a `renderer.js.coffee` file underneath `config/marionette`. Don't forget to tell the Rails asset pipeline to load the `config` folder before loading the rest of the application. Here's our renderer code, which taps directly into Marionette:
+
+	Backbone.Marionette.Renderer.render = (template, data) ->
+		path = JST["backbone/apps/" + template]
+		unless path
+			throw "Template #{template} not found"
+		path(data)
+		
+Here we override the Renderer function's render method, which by default takes a template object and a data object (see the Marionette documentation for more details). Then we're implementing the default behavior, while overriding the default path to be `backbone/apps/`, so that we don't have to type that in for each template. Neat, no?
+
+18) Back in our Show.Footer view:
+
+	template: "footer/show/templates/show_footer"
+	
+Note of course that the path provided is relative to `backbone/apps/`, and that the template path is being wrapped in a JST[] call for us. 
+
+By default, the `show_footer` template will be wrapped in a `<div>` element (which we can see if we inspect the page that loads). If we want to override this implementation, in our view file, we can simply tap into the `tagName` property:
+
+	tagName: "li"
+	
+By adding in our template, we've added a new property to the footerRegion object--currentView. CurrentView in this case holds a reference to our Footer view, but we could pass in any number of views to this object to update the content within. When we call `App.footerRegion.show`, Marionette checks which view is currently being held, and updates the view as appropriate, removing the old view if necessary. There's no need for us to explicitly remove any old views. 
+
+19) In our template, we can now add the view we want displayed in the footer, and it will be shown when the app starts. 
+
+At this point, we've seen default arrangements for adding many smaller "apps" to make our bigger app, and we can work off these arrangements to create our entire app. To save the repetition, I won't show the process of adding our headerRegion and mainRegion, because you're now prepared to handle that on your own.
+
+Congratulations! You're now ready to build your first Backbone app. Time to get cracking!
+
+
+		
 
 
 	
