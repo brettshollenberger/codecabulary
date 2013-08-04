@@ -1,4 +1,4 @@
-# Backbone/Marionette on Rails
+# Backbone and Marionette on Rails
 
 _This article assumes a good knowledge of Rails, Coffeescript, Javascript, and jQuery, but little-to-no knowledge of Backbone and Marionette. We'll be moving quickly over concepts in other libraries (and often deferring to your own judgement about their setup), so if you need help, please refer to the following resources:_
 
