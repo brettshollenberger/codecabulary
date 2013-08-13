@@ -32,4 +32,4 @@ Cool, but we can't write that in CoffeeScript, right? Wrong. CoffeeScript's _do_
 	  
 	  App // Use CoffeeScript's implicit return
 	  
-And how much nicer is that to look at? 
+Much more concise, and easier to read. Win win.
