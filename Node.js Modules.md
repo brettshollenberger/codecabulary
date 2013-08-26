@@ -64,6 +64,7 @@ Being that that's the case, we can simply expose the class itself:
 	
 	$ var instance1 = new imported_class();
 	
+And this final method tends to be the right choice for advanced users of our module, since it enables the most flexibility, including the ability to extend our module.
 
 	
 	
