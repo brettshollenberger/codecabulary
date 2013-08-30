@@ -1,22 +1,35 @@
 # Template Method Pattern in Angular Templates
 
-Let's say we have a lot of functionality that's the same across multiple directives--very similar HTML output with minor differences based upon the state of a certain object that's being output. We know we want to DRY up our templating, and thanks to Angular's transclude attribute in directives, we can follow the Template Method Pattern to vary our algorithm based on these minor differences.
+Let's say we have model instances that will use much of the same functionality, with slight variances among a given algorithm. We're good programmers, and we don't like to repeat ourselves, so we want to vary the algorithm slightly without writing the same code over and over again--even when we work on the front end. The Template Method Pattern lets us do this, and thanks to Angular's `transclude` property on directives, we can include placeholders for these minor variations in our templates. 
 
-Recently our designer told me to output projects in color if they were active, and black and white if they were closed. The HTML and CSS was basically the same for the projects, so how to switch up the styling based on the project's state?
+At Faculty Creative, we've been working on a project where our design team asked me to style active projects in color and old projects in black and white. As you might image in, the HTML and LESS for the projects was pretty much the same, with some minor changes to applied classes in a few places. Here's one approach to keeping the code DRY:
 
-In Angular, we can vary the algorithm with transclusion:
+Angular lets us write highly reusable code using directives--custom HTML templates with superheroic abilities. 
 
-	<project-item><img ng-src={{project.img}} class="black-and-white"></project-item>
-	
-Then in our directive:
+	angular
+	  .module('app')
+	  .directive('projectQuickView', function() {
+	    return {
+	      restrict: 'E',
+	      replace: false,
+	      templateUrl: 'app/templates/partials/projectQuickView.html',
+	      transclude: true
+	    };
+	  });
 
-	transclude: true
-	
-And in our template:
+In this directive, I've declared that we'll be able to write the directive as an element (`<projectQuickView></projectQuickView`), that we won't replace this element, but will rather interpolate the template into it, and I've declared where the template to interpolate lives. The kicker line is `transclude: true`, which allows us to utilize the built-in `ng-transclude` to interpolate a placeholder in our template, thus allowing us to vary the algorithm as we see fit. 
 
 	<div class="project">
-		<span><ng-transclude></span>
+		<ng-transclude>
 		... awesome project layout ...
 	</div>
 	
-And the image with the proper class will be interpolated into the position of the `ng-transclude` call. Thereby we can have two templates doing mostly the same thing, but varying their class based on project state.
+Then for old projects, our layout looks like this:
+
+	<projectQuickView><span class="black-and-white"></span></projectQuickView>
+	
+And for new projects, our layout looks like this:
+
+	<projectQuickView><span class="in-living-color"></span></projectQuickView>
+	
+And presto! We've used the same layout with slight differences for highly reusable code that can also take additional new stylings as we expand the project. Super rad. 
