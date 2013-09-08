@@ -300,5 +300,22 @@ Again, we can test these best via cURL, which we can see via the following cURL 
 	// Update
 	curl -X PUT -H "Content-Type: application/json" -d '{"title":"A New Wonderful Title"}' http://localhost:3000/api/pages/objectid
 	
+#### Service
+
+	angular
+	  .module('app')
+	  .factory('featureService', [
+	    '$resource',
+	    function($resource) {
+	      return $resource('/api/features/:id',
+	        { id: '@id' },
+	        {
+	          update: {
+	            method: 'PUT'
+	          }
+	        }
+	      );
+	    }]);
+
 
 
