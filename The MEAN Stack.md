@@ -225,9 +225,9 @@ So we probably want to get our collection populated with some data, and there's 
 	      title: data.title,
 	      content: data.content,
 	      publish: data.publish
-	    }, function(error, feature) {
+	    }, function(error, page) {
 	      if (!error) {
-	        res.json(feature);
+	        res.json(page);
 	      } else {
 	        res.json(error);
 	      }
@@ -300,14 +300,35 @@ Again, we can test these best via cURL, which we can see via the following cURL 
 	// Update
 	curl -X PUT -H "Content-Type: application/json" -d '{"title":"A New Wonderful Title"}' http://localhost:3000/api/pages/objectid
 	
-#### Service
+#### Creating Services to Interact with the API
+
+Now we have an API that we can use to send and receive JSON objects to and from the server, and the next piece we should build is a service--an object that defines utility methods that will abstract the process of communicating with the database and returning the correct data. 
+
+In the RESTful API we defined above, we know we always want to be able to send particular JSON to the server and return the correct object if the POST to the server was successful. In since this is the case, we don't want to have to shout out the URL to hit, the JSON to send, what to do with errors and success, and what to write in the HTTP response headers and bodies; we want to simply be able to say:
+
+	Feature.$save();
+	
+So we define a utility method to abstract all this boilerplate code away. We also need to do the same for our other RESTful actions, and fortunately, Angular comes with a helper service called `$resource` that will do just that for us.
+
+`$resource` receives an API URL as an argument, and it uses that URL to extrapolate the entire RESTful API. For example, we defined above the API `/api/pages/:id`, where `:id` is the optional id parameter that refers to the unique identifier of the page. In some of our URLs (`/api/pages/2`), we want to use the identifier to show, update, or delete a specific page. For our other URLs (`/api/pages`), we want to show all the pages or POST a new page to the collection of pages. Angular is smart enough to extrapolate these various URLs out of the one URL we provide (`api/pages/:id`), as long as we follow this RESTful convention when we define our API. 
+
+`$resource` returns an object to us called a resource class, which has five default methods:
+
+	{ "get"       : { "url" : "/api/pages/:id", "method" : "GET" },
+	  "save"     : { "url" : "/api/pages", "method" : "POST" },
+	  "query"    : { "url" : "/api/pages", "method" : "GET", "isArray" : "true" },
+	  "remove" : { "url" : "/api/pages/:id", "method" : "DELETE" },
+	  "delete"   : { "url" : "/api/pages/:id", "method" : "DELETE" }
+	}; 
+	
+These methods are built automatically by Angular using the single URL we provide, and can be overridden if need be. We'll also notice here that a `PUT` request is not automatically available (although strangely two `DELETE` requests are. We can, however, define our own custom methods on the `$resource` method, taking the same hash of options as a default `$resource` method (there are many more options available in the Angular API for you to check out). A full example of using the `$resource` method is provided below (with us also defining a default value for the `id` parameter as the `id` object provided in the URL. 
 
 	angular
 	  .module('app')
-	  .factory('featureService', [
+	  .factory('pageService', [
 	    '$resource',
 	    function($resource) {
-	      return $resource('/api/features/:id',
+	      return $resource('/api/pages/:id',
 	        { id: '@id' },
 	        {
 	          update: {
@@ -317,5 +338,35 @@ Again, we can test these best via cURL, which we can see via the following cURL 
 	      );
 	    }]);
 
+As you can see, we only needed to provide the method for the `update` action that we added; the URL will be determined automatically.
 
+#### Writing RESTful Controllers
+
+My preferred way of writing RESTful controllers is to use a single controller per resource (`PageController`), and to define RESTful actions on that controller that we pass to the Express router:
+
+	app.get('/pages', pages.index);
+	app.post('/pages', auth.requiresLogin, auth.article.hasAuthorization, pages.create);
+	app.get('/pages/:id', pages.show);
+	app.put('/pages/:id', auth.requiresLogin, auth.article.hasAuthorization, pages.update);
+	app.del('/pages/:id', auth.requiresLogin, auth.article.hasAuthorization, pages.destroy);
+	
+Now we can define these RESTful actions in our controller:
+
+	angular
+	  .module('app')
+	  .controller('PageController', [
+	    '$scope',
+	    '$location',
+	    '$routeParams',
+	    'pageService',
+	     function($scope, $location, $routeParams, Page) {
+	     	
+	     	exports.index = function(req, res) {
+	     		Page.query(function(pages) {
+		            res.json(pages);
+		        });
+		};
+		
+And so forth. That's one way of organizing an entire MEAN stack; all that's left to do is hook up some views to visualize the data. But the more interesting work in MEAN right now is in organizing this backend; how do you all organize your stack?
+	
 
