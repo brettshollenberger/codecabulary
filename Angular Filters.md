@@ -69,7 +69,7 @@ An Angular filter works by using the pipe character (`|`), and filters can be st
 	
 #### Defining Custom Filters
 
-We can also define custom filters that can be reused throughout our applications. To register a filter, we use the `filter` keyword, and in our callback we return the filter function:
+We can also define custom filters that can be reused throughout our applications. To register a filter, we use the `filter` method, which creates an injectable filter factory, and in our callback we return the filter function:
 
 	app.filter('piglatinize', function() {
 	  return function(line) {
