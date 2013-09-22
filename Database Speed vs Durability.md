@@ -1,0 +1,9 @@
+# Database Speed vs Durability
+
+Database designers make tradeoffs between high speed writes (speed) and assurance that all data written has been done so reliably (durability). An inverse relationship exists between speed and durability; writing to magnetic HDD is orders of magnitude slower than writing to RAM, but in the event of an unclean shutdown (a power outage, for example), everything written to RAM will be lost. Although some databases like memcached rely exclusively on RAM, and are extremely fast, they're also extremely volatile, and designers usually make compromises between speed and durability.
+
+MongoDB allows users to mediate this issue themselves by selecting a write semantic and whether or not to enable journalling. 
+
+The two write semantics are fire-and-forget and safe mode. Fire-and-forget writes are sent across a TCP socket without requiring a response from the database--inherently, there's no assurance that the write has been saved successfully. Safe mode writes have a degree of customization; by default they will require a response from the database that ensures the data was received without errors, but they can also be used to do things like block until a write has been replicated across a certain number of servers. For high volume, low importance data, fire-and-forget methodologies can work well; for high importance data, safe-mode is important.
+
+Journalling will provide even more assurance of committed data than safe mode. By default, journalling is enabled in MongoDB, and will commit every write to a log that can be used to ensure files are restored to a consistent state should you lose the server temporarily.  
