@@ -152,7 +152,7 @@ Now let's describe our schema for each page:
 	  }
 	});
 	
-Now we'll use our genericAPI factory function to create a Model object out of our schema. You'll notice this function is nice and generic, allowing us to easily add a new schema that will get mapped to a Model object as well if we see fit in the future:
+Now we can use our genericAPI factory function to create a Model object out of our schema. You'll notice this function is nice and generic, allowing us to easily add a new schema that will get mapped to a Model object as well if we see fit in the future:
 
 	// server/lib/mongoSchema.js
 	for (entity in schema) {
