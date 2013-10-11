@@ -175,7 +175,7 @@ Now we can add files to our API folder for each resource we want to map to. Foll
 	$ curl http://localhost:3000/api/features
 	
 	// Show
-	$ curl http://locaolhost:3000/api/features/objectid
+	$ curl http://localhost:3000/api/features/objectid
 	
 	// Update
 	curl -X PUT -H "Content-Type: application/json" -d '{"title":"A New Wonderful Title"}' http://localhost:3000/api/features/objectid
