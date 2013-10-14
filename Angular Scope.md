@@ -36,5 +36,7 @@ Angular is a front-end framework that's really good at helping us create single-
 
 Angular's built-in directives (anything prefaced with `ng`) perform these asynchronous view-model updates for us, which may seem a bit magical, but it's a perfectly normal part of the process. Some Angular developers think that explicitly telling Angular about a model update that's occurred on the view is somehow going against the grain of the framework, but under the hood that's what Angular's doing for us already, and we just need to know how to tap into Angular's information propagation services. 
 
+#### $watch
+
 
 
