@@ -1,6 +1,30 @@
 # Angular Scope
 
-In object-oriented languages, and in Javascript's idiosyncratic prototypal inheritance structure, we have the concept of `scope` -- the program context in which a given identifier refers to an object or method. We have instance variables and class methods and we namespace classes in modules--and we have mechanisms to decide which version of a given identifier is being referred to within a given context. Scopes make modular programming possible, and modular programming is easier to maintain and read, and an easier codebase to enter as a new developer. 
+In object-oriented languages, and in Javascript's idiosyncratic prototypal inheritance structure, we have the concept of `scope` -- the program context in which a given identifier refers to an object or method. Angular follows suit with frameworks like Ruby on Rails in using scopes in controllers to expose instance properties and methods to the views, which in RESTful applications often includes both instances of model classes and declarative view instantiation. 
+
+	# Ruby
+	def new
+		@user = User.new
+	end
+	
+	// Javascript
+	function new() {
+		$scope.user = new User();
+	};
+
+In Rails and Angular we can continue to define additional scopes, like we can on the fly with for loops:
+
+	<% @users.each do |user| %>
+		<p><%= user.name %></p>
+	<% end %>
+	
+	<div ng-controller="UsersIndexCtrl">
+		<div ng-repeat="user in users">
+			<p>{{user.name}}</p>
+		</div>
+	</div>
+	
+In both cases, the child scope contains not only our variable defined on-the-fly as in traditional loops, but also the variables that exist in its parent context (and its parent's parent context, etc). 
 
 In Angular, the best description of scopes offered by the core team is: "an execution context for expressions;" this description fits in with our classical understanding of scopes, but there are some other, more confounding descriptions offered by the core team that deserve clearing up. First, the core team says that the scopes of an application refer to the application model--and what they mean is not the capital M Model in MVC, but the application hierarchy that very closely mimics the DOM. For example, take a look at this HTML snippet:
 
@@ -13,6 +37,8 @@ In Angular, the best description of scopes offered by the core team is: "an exec
 	</html>
 	
 In the example above, Angular creates a hierarchy of scopes starting at the `ng-app` directive. `ng-app` creates the `$rootScope`, which is equivalent to the highest level namespace in your application. All other scopes hang off of the `$rootScope`, and inherit any variables defined there. Scopes, like other Javascript objects, inherit prototypically--they can inherit from and override variables defined in the parent context. So when we declare the `ng-controller` directive, it too instantiates a scope object, which inherits from `$rootScope`, and we have a simple hierarchy that is closely akin to our DOM structure. 
+
+Scope objects are bound to and exposed to a view, and upon further inspection, we can see how scopes 
 
 The Angular core team also says that scopes are where we define the business logic of our program, classically a concern of the controller in a strict MVC design architecture, but it's also important to note that we use scopes to define things like DOM manipulation, which should not be a controller concern. In this regard, it's more useful to defer to the definition of a scope as simply an execution context in which variables, objects, and methods exist, and not strictly as a hub for business logic. In this regard, when the core team says that scopes are the glue between a controller and a view (the go-between that allows a view to update a model, for instance), it's also important to understand that a scope can be the glue between a view and a directive's link function, which is meant to handle DOM manipulation; a scope is really the glue between the view and some other part of the application, not just the controller, which should maintain a specialized business-logic role in solid design architecture. 
 
@@ -28,7 +54,7 @@ If the Ruby example above is foreign, understand that `new` refers to a controll
 	
 Here we simply expose a user instance to a view, an empty user object with the properties and methods we need to allow the object to interact with the database. In Ruby the `@` sign refers to an instance variable, which is also true of `$scope`--it essentially says `this.user` where `this` refers to the view instance. 
 
-Other Angular developers may note a potential point of contention here--we use `this` in directive controllers, so how could `this` be similar to `$scope`? The difference is that a `$scope` refers to a variable exposed on an instance of a view, where `this` in directive controllers refers to an instance of the directive's controller. 
+Other Angular developers may note a potential point of contention here--we use `this` in directive controllers, so how could `this` be similar to `$scope`? The difference is that `$scope` refers to an object bound to and exposed to a view. 
 
 #### The Glue
 
