@@ -6,7 +6,6 @@ Angular forms consist of three layers:
 * The data-binding layer - Angular hooks into instances of model objects, and provides getters and setters to update the model objects and the views as a user types in information. This binding is two-way, meaning updates in the view are immediately propagated to the model instance, and vice versa. This is achieved through the `ng-model` directive and model objects exposed on`$scope` objects, and is an area where Angular shines in comparison to other Javascript frameworks.
 * The directive-controller layer - Angular's directives (`ng-model`, `ng-form`) provide an interface for working with them via directive controllers (`ngModelController`, `ngFormController`). `ngModelController` and `ngFormController` work together to declare this API. 
 
-
 #### The Directive-Controller Layer
 
 `ngModelController` presents four types of methods and properties for interacting with the data-binding. The first type verifies whether the user has interacted with the input (`$pristine`, `$dirty`), and allows us to set the value dirty or pristine (`$setPristine`, `$setDirty`); the second type parses information from the view into the format used in the model (`$parsers`), and formats the model data for display in the view (`$formatters`); the third type verifies the validity of the input (`$valid`, `$invalid`), and allows us to set whether or not the input is valid ourselves (`$setValidity`); and the fourth type allows us to retrieve the view or model value (`$viewValue`, `$modelValue`) and to set these values (`$setViewValue`).
@@ -26,3 +25,9 @@ The input and `ng-model` directives should be a part of this layer, whereas acco
 #### The Data-Binding Layer
 
 `ngModel` watches the view value and model value and updates each accordingly. It verifies the validity of inputs based on the directives defined on them, and adds CSS classes `ng-dirty` and `ng-pristine` accordingly. `ngModel` also uses the `validationErrorKey` (`required`, `email`) to set specific classes, like `ng-invalid-email`, which can be hooked into to define specific feedback to the user. The inputs and form also expose an `$error` object which tracks these errors, and can be used for presenting error messages to the user. 
+
+#### Suggestions for the future of Angular forms
+
+Angular forms present duplication of concerns by way of validations and database interactions. According to the ActiveRecord pattern, model instances should be responsible for presenting their data, verifying its validity, and providing an interface for retrieving that data from the database and persisting changed versions back. By allowing models to define their save functionality and validations, we can provide a set of reasonable defaults (clicking a submit button calls a model instance's `save` method, and validation directives are added appropriately as defined by the model object). We can go a step further in factoring out common validation types like required and email such that a model class merely needs to define that it uses these validations, and Angular takes care of validating those concerns; domain-specific validations could still be added on top of these, and remain DRY by writing them in a single location. 
+
+

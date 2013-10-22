@@ -1,30 +1,16 @@
 # Angular Scope
 
-In object-oriented languages, and in Javascript's idiosyncratic prototypal inheritance structure, we have the concept of `scope` -- the program context in which a given identifier refers to an object or method. Angular follows suit with frameworks like Ruby on Rails in using scopes in controllers to expose instance properties and methods to the views, which in RESTful applications often includes both instances of model classes and declarative view instantiation. 
+Angular scope objects define instance methods for Angular's view directives. Angular's views instantiate scope objects, which inherit prototypically from the scope objects that contain them. For example:
 
-	# Ruby
-	def new
-		@user = User.new
-	end
-	
-	// Javascript
-	function new() {
-		$scope.user = new User();
-	};
-
-In Rails and Angular we can continue to define additional scopes, like we can on the fly with for loops:
-
-	<% @users.each do |user| %>
-		<p><%= user.name %></p>
-	<% end %>
-	
-	<div ng-controller="UsersIndexCtrl">
-		<div ng-repeat="user in users">
-			<p>{{user.name}}</p>
-		</div>
+	<div ng-app="app">
+		<div ng-controller="MainCtrl"></div>
 	</div>
+
+The `ng-app` directive injects `rootScope`, and calls `$rootScope.$new()`, returning a new scope object containing any properties and methods that have been declared on the `$rootScope` object anywhere else in the application. `ng-controller` takes the scope variable that was instantiated by `$rootScope.$new` (let's call it `scope1`), and calls `scope1.$new()`, which returns a new `scope2` that inherits prototypically from it. Literally:
+
+	scope2.__proto__ = scope1;
 	
-In both cases, the child scope contains not only our variable defined on-the-fly as in traditional loops, but also the variables that exist in its parent context (and its parent's parent context, etc). 
+Though `scope2` does not define the variables defined on `rootScope`, it has access to them. It also has access to whatever instance variables and methods were declared on the `ng-controller` directive with the name `MainCtrl`. In this way, Angular services (including self-created directives, built-in directives, and controllers) act similarly to "scope classes," (aka classes that instantiate scope objects), _whose prototypes are not known until runtime_.  
 
 In Angular, the best description of scopes offered by the core team is: "an execution context for expressions;" this description fits in with our classical understanding of scopes, but there are some other, more confounding descriptions offered by the core team that deserve clearing up. First, the core team says that the scopes of an application refer to the application model--and what they mean is not the capital M Model in MVC, but the application hierarchy that very closely mimics the DOM. For example, take a look at this HTML snippet:
 
