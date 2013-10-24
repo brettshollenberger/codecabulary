@@ -5,7 +5,7 @@ To minify Angular scripts for production, we need to use the array notation for 
 	angular.module('app', [])
 		.controller('MyController', ['$scope', function($scope) { }]);
 		
-The reason we do this is because function arguments will get reduced to simple variables by the minified:
+The reason we do this is because function arguments will get reduced to simple variables by the minifier:
 
 	angular.module('app', [])
 		.controller('MyController', ['$scope', function(a) { }]);
