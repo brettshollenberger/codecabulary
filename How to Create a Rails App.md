@@ -116,6 +116,17 @@ This command generates the test environment that Rspec uses. You’ll need to re
 
 Don’t forget to commit after you Migrate!
 
+#### Extras: add database.yml and secret_token.rb to your .gitginore
+
+This is just a good habit to get into. When others fork your repos, having special database settings can give them a headache
+when trying to check out your code. Do them a favor and tell git to ignore that file. Another file to add is the secret_token.rb
+-- it's called that for a reason! It's supposed to be secret! Protect your users by hiding this file.
+
+In your .gitignore file add the lines:
+    
+    /config/database.yml
+    /config/secret_token.rb
+
 ===
 
 ### From here you can do whatever you’d like, and you shouldn’t break your app too much. Have fun!
