@@ -13,7 +13,7 @@ First there was “rails new Foo” -- the next thing you know you’re adding �
 
 At Launch Academy we tend to use postgresql. So to save yourself a little extra work, make sure you include the --database flag when executing rails new.
 
-#### 2)  remove turbolinks in Rails 4.x. in Rails 3.x, make sure you remove the public/index.html
+#### 2)  remove turbolinks in Rails 4.x -- for Rails 3.x, make sure you remove the public/index.html
 
 How to remove Turbolinks:
 
