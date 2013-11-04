@@ -1,6 +1,69 @@
 # Angular Dependency Injection
 
-Angular's renowned for its dependency injection system; in part because dependency injection is a good design pattern, and in part because Angular removes a lot of DI boilerplate for resolving dependencies through factories in the vein of Java's Google Guice. 
+> 140 character version: Angular's DI system does not fully employ the DI design pattern. We can inject mocks during testing & fill in the gaps w/ the factory pattern.
+
+One of Angular's most discussed features is its dependency injection system, which is really a dependency lookup system rather than an implementation of the dependency injection design pattern. The design pattern is an implementation of the strategy pattern applied to a function's signature--it allows developers to create flexible, duck-typed interfaces that will accept any dependency with an interface that fulfills the contract invoked by the object that uses it. If an emailing service requires an object that responds to an email method to provide an email address, the service doesn't care if it receives a user object from our system or a user from a Facebook API call--it just needs an object that maintains the contract declared between the two. 
+
+In a way, Angular provides this functionality by allowing us to swap out dependencies during the configuration phase. This flexibility allows us to create mock dependencies during testing and proves valuable for actually isolating individual objects during unit testing. However, Angular services are singletons--created once from a pre-configured method call--and we cannot create multiple instances with slightly different dependencies to suit our needs. Instead, we rely on our services to implement a factory pattern to achieve a similar type of functionality that we'd use dependency injection for in other languages. 
+
+#### Using and Abusing Angular's DI System
+
+Angular's dependency injection system removes a lot of boilerplate code required to lookup dependencies by registering those dependencies through a "provider" syntax akin to Google Guice for Java, and it helps Angular achieve modularity; it's easy to let modules register explicit dependencies on one another because you don't have to specify file paths as long as modules are registered with the system. 
+
+A typical dependency lookup system splits its API into two categories: '
+
+1) A provider syntax - A syntax that declares what will be injected when an object asks for an object or function registered with the DI system (`$provide`)
+
+2) An injection syntax - A syntax that declares which objects or functions a module, class, or function relies on to be injected (`$inject`)
+
+In a language like Java, these syntaxes are declared using annotations. Javascript does not implement annotations, so the Angular team uses two of its own internal services to provide the same functionality--`$inject` and `$provide`. 
+
+#### Provider Syntax
+
+The provider syntax allows us to declare what will be passed to an Angular object when that object declares a dependency on our service. There are four methods provided by Angular to declare our services, but three of them are actually convenience methods that shortcut the other method--`$provide.provider`:
+
+1) Provider is the father of all the other methods. It provides the most flexibility when declaring our services, but also requires us to write the most code. It allows us to create private methods, methods that can be used to configure our module, and a `$get` method that describes what will be injected into functions and classes that rely on our service. To use the `provider` method, we declare a constructor as the last argument. Any publicly exposed methods that are not the `$get` method can be used to configure our service; the `$get` method describes what to return when our service is evaluated and invoked as a dependency:
+
+	angular.module('myModule', [])
+		.provider('URLHelper', function() {
+			var config = {
+				links: []
+			}
+			
+			this.setLinks: function(links) {
+				config.links = links;
+			},
+			this.$get: ['NavLink', function(NavLink) {
+				_.each(config.links, function(link) { return new NavLink(link); });
+				return config.links;
+			}
+		});
+
+In the example above, we describe a function `setLinks` that allows us to configure the links for our application. We might configure the service in our `app.js` like so:
+
+	var links = {};
+
+	links.home = {
+	      href: '/#/dashboard',
+	      text: 'Home',
+	      subcategories: {}
+	};
+
+	links.security = {
+	      href: '/#/security/events',
+	      text: 'Security',
+	      subcategories: {
+	        events:  { href: '/#/security/events', text: 'Events', parent: 'Security' },
+	        sensors: { href: '/#/security/sensors', text: 'Sensors', parent: 'Security' },
+	        devices: { href: '/#/security/devices', text: 'Devices', parent: 'Security' }
+	      }
+	};
+
+    	URLHelper.setLinks(links);
+    	
+2) `factory` describes a provider that only consists of a `$get` function. We use it when our module requires no configuration. 
+    	
+When a module declares a dependency on our URLHelper, it will receive these configured links via the `$get` function.
 
 #### General Overview of Dependency Injection
 
