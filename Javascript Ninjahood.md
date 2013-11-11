@@ -29,14 +29,25 @@
 
 7) Function underloading (not passing enough parameters to a function) results in the excess parameters being set to `undefined`.
 
-8) Named functions are no longer anonymous, and can be copied without fear of the original function disappearing:
+8) Named inline functions are no longer anonymous, and can be copied without fear of the original function disappearing:
 
 	var ninja = { chirp: function chirp(n) { return n; } }
-	var sam = { chirp: ninja.chirp }
+	var samuari = { chirp: ninja.chirp }
 	ninja = {}
-	sam.chirp(1)
+	samauri.chirp(1)
 	> 1
 	// It still exists
 	
+9) Function memoization:
 
+	function myMemoizer(arg) {
+		if (!myMemoizer.answers) myMemoizer.answers = {};
+		if (myMemoizer.answers[arg]) return myMemoizer.answers[arg];
+		... compute answer ...
+	}
 
+10) Using call/apply to get at built-in methods:
+
+	Array.prototype.slice.call(arguments, 1);
+	
+11) 
