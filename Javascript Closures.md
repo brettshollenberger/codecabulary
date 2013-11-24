@@ -1,5 +1,25 @@
 # Closures in Javascript
 
+	function User(properties) {
+		for (var i in properties) {
+			(function() {
+				var local = i;
+				this['get' + local] = function() { return properties[local]; };
+				this['set' + local] = function(val) { properties[local] = val; };
+			}).call(this);
+		}
+	}
+	
+	var user = {name: 'brett', age: 24}
+	
+	var brett = new User(user);
+	
+In the example above, we create a number of privileged methods--methods that get or set the values of private variables. `brett` doesn't have access to get or set `name` or `age` directly, but it does have access to `getname`, `setname`, `getage`, and `setage`. So why the IIFE (immediately-invoked function expression) in the middle of the code? Isn't it a bit confusing? Is it even necessary?
+
+The reason we create the IIFE is to create a closure--an encapsulated bubble in which our private variables live. Although we define our functions like `getname`, and then expect the code to cease executing, we couldn't write the getters above simply as `return properties[i]`. That's because blocks (like for statements) don't create scopes in Javascript, and the value of `i` changes each time we run through the loop. You already knew that, but what you might not have known is that, when our functions are called dynamically by the user, the code within the function is evaluated each time to return a value, and functions remember the values of the local variables within their scope. Since the `for block` doesn't create a new scope, only one scope has been created (the scope of the User function itself). That means that the value of `i` is currently the last value that ran through the loop (`age`), and `all` functions evaluate the latest value of `i`, will attempt to get or set age. 
+
+The IIFE creates a closure with a private variable (`local`), which is the value of `i` during that iteration of the `for` loop. Each getter/setter pair gets its own private bubble (its closure), and so it gets its own private value for `local`, which it can remember via the closure. The closure won't go away unless we remove all public properties (the getters and setters) that needed to reference private values in the closure. If we did delete all public properties, the closure would be garbage collected, saving us from any fear of random private values floating around with nothing needing to reference them.  
+
 Lots of Javascript developers get by without ever understanding the concept of closures--but they use them every day without realizing it. Closures are the scope created by functions (all Javascript functions create a scope) that allows the function to access and manipulate external variables. Variables created within the function's scope are local to that function, and cannot be referenced by parent scopes, which can allow us to mimic the concept of private variables, even though Javascript doesn't give us private variables as a distinct feature of the language. Another nice features of closures is that they will keep the data they need from being garbage collected. They act as a type of protective bubble that keeps the variables they require in scope as long as they themselves are a part of our application.
 
 So what exactly does a closure have access to?
