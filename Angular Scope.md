@@ -1,5 +1,87 @@
 # Angular Scope
 
+Angular's scopes are probably the least documented and least understood portion of the framework. What information does exist about scopes is confusing if you've got a bit of background in Javascript or MVC patterns--a scope is not an execution context for expressions and it's not a model--it's a scope. If all that sounds confusing (or just straight repetitious), don't worry, I'll explain what I mean along the way:
+
+#### Scopes are Scopes
+
+The most important thing to know about Angular scopes is that they _are_ scopes (there's that repetition again). In computer science, scopes are the sections of our program in which identifiers are valid, and we can use them to look up their values. In a Javascript program, I can declare a variable `someNum` and look up its value later:
+
+	var someNum = 1;
+	someNum
+	>> 1
+
+Simple enough. The scope of someNum is global in this case; I've declared it outside of any function, so it can be accessed from anywhere in the application. 
+
+#### The Scope Chain
+
+As you might guess, functions in Javascript create new scopes, which limit the range of the variables declared within them to the function itself, and any children of that function:
+
+	var currentScope = 0;
+	(function() {
+		var currentScope = 1, one = 'scope one';
+		(function() {
+			var currentScope = 2, two = 'scope two';
+			console.log("I can see ' + one + ' and ' + two);
+			console.log("The current scope is ", currentScope);
+		})();
+		console.log("I can see " + one);
+		console.log("But logging the value of two in scope one would throw an error; it is outside of scope one's scope");
+		console.log("The current scope is ", currentScope);
+	})();
+	
+	>> I can see scope one and scope two
+	>> The current scope is 2
+	
+	>> I can see scope one
+	>> But logging the value of two in scope one would throw an error; it is outside of scope one's scope
+	>> The current scope is 1
+	
+While this example may seem trivial, it's important to understand the scope chain well, because Angular creates scopes in the same way. Both Javascript and Angular represent scopes as objects, so let's first see how Javascript handles this. All functions create scopes, and each function has a private property called [[`scope`]] that refers to its scope chain, the collection of scopes that it has access to, starting with its own scope, and expanding outwards to the global scope. Let's see what scope 2's scope chain from the example above would look like:
+
+	[
+		0: {
+			currentScope: 2,
+			two: 'scope two'
+		},
+		1: {
+			currentScope: 1,
+			one: 'scope one'
+		},
+		2: {
+			currentScope: 0
+		}
+	]
+	
+We see here the scopes represented as objects (as they are in Angular); they store key-value pairs representing the variables available within their scope. Identifier resolution works its way through each scope, starting at the first scope in the chain (the scope created by the function itself), and working its way outwards. When we log out the currentScope in scope two, it doesn't need to continue looking for the variable in scope one, because it finds it in its current scope, which is why it resolves to `2` instead of `1` or `0`. 
+
+#### Angular's Scope Objects Almost the Same...
+
+In Angular, new scopes are still created by functions in the same way they are in vanilla JS, but Angular also exposes a public `$scope` service to us. Rather than `[[scope]]` being a _just_ a private property of functions, Angular gives us a `$scope` object with a few notable differences:
+
+1) Properties exposed on `$scope` objects are available in Angular templates
+2) Not every variable declared in a Javascript function is added to the `$scope`; we explicitly set properties on the `$scope` object, thus defining a public interface for our `template objects` (directives and controllers, or objects that are meant to expose data to, or manipulate a template)
+3) `$scopes` are not part of a `scope chain` as in vanilla Javascript. Instead, they inherit prototypically; they are simply defined by a constructor in Angular. Prototypal resolution is almost identical to scope chain resolution, and for practical purposes, you won't notice a difference, but it may interest some to see how Angular mocks scopes. 
+
+#### Template 
+
+In Angular, new scopes are created by functions in the same way as vanilla Javascript, with one special aspect: scopes not only exist within our Javascript code, they're also extended to our templates, so that we can reference our primitives, objects, and functions from within our HTML. Scopes are still created by functions (to be specific, the `linking function`s of directives), but in Angular, scopes are not under-the-hood (as they are in Javascript). They're also exposed to us via the `$scope` service, which we can add properties to directly, the way that Javascript compiles the properties available within a given scope. 
+
+This add-to-scope functionality allows us to be very declarative when creating our public API--only the variables exposed on the `$scope` object will be exposed to the view.
+
+#### Controlling Scope Creation
+
+Angular gives us quite a bit of control over how they are created--for instance by allowing us to isolate the scopes from one another. In the example above, scope 2 could resolve properties further up the scope chain (in scopes 1 and 0), but an isolate scope tells Angular to break the scope chain--ensuring that the isolate scope cannot manipulate data in its parent scopes (is it normally would be able to). Angular achieves this separation because 
+
+
+
+
+
+Notice how Javascript represents the set of variables present within a given scope as objects--these are called variable objects. Angular also represents its scopes as objects (which you likely know if you've played around with it a little bit). 
+
+
+
+Angular allows us to create new scopes--new sections of our program in which identifiers can live--in a way that is different from traditional Javascript. 
+
 Angular scope objects define instance methods for Angular's view directives. Angular's views instantiate scope objects, which inherit prototypically from the scope objects that contain them. For example:
 
 	<div ng-app="app">
