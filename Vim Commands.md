@@ -28,3 +28,8 @@ E.g.
 	:%s/def/function/g
 	
 The `c` option is unique to Vim, and stands for confirm. It will ask you before performing each substitution.
+
+1) /search over text
+2) Make a change
+3) Press `n` to get the next instance
+4) Press `.` to repeat the same change
