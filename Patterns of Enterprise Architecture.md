@@ -29,3 +29,12 @@ The nature of enterprise applications causes several distinct architectural prob
 10) Business logic is often illogical, but difficult to change without significant political effort
 11) Business logic can contradict itself
 
+#### Organizing Domain Logic:
+
+Fowler presents three methods for organizing domain logic:
+
+1) Transaction script - Procedural, simple business transactions. Can share code via subroutines, but often results in duplication and exponentially increased complexity as domain logic complexity increases. Suffers from a lack of discernible organization.
+2) Domain model - Organization of the nouns within the domain into classes that interact with a persistence layer, often via Row Data Gateway or Table Data Gateway. Though the initial cost in understanding domain model is the highest of the three, it offers the simplest, most linear scalability as domain logic complexity increases (and it always will).
+3) Table module - Where domain model has one instance per db record, table module has one instance (the table). This works with a record set, and formalizes some bits of the transaction script model, while still primarily using procedural code. 
+
+The basic advice of Fowler is that if a team knows domain model well, it's usually the best choice. If working in an environment where a lot of tools are geared towards working with record sets, like .NET, then table module can be a good choice, but otherwise it doesn't offer benefits over domain model.
