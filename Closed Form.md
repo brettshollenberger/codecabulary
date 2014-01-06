@@ -94,5 +94,4 @@ Is not a valid closed-form expression. It references a previous function result 
 
 6) Logarithms. 
 
-Basically, the things you know how to do already. That makes it easy, but it also doesn't make it easy to write. While recursive functions often write themselves based on the mathematical definition, closed-form functions require a bit of legwork, a bit of luck, a bit of `magic` if you will. 
-
+Basically, the things you know how to do already. That makes it easy, but it also doesn't make it easy to write. While recursive functions often write themselves based on the mathematical definition, closed-form functions require a bit of legwork and a bit of luck.
