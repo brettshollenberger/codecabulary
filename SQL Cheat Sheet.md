@@ -95,3 +95,36 @@ Joining multiple columns together with an alias:
 	WHERE Members.id = 1
 	ORDER BY Categories.category
 	
+## Equijoins And Non-equijoins
+
+Equijoin is the name for an `ON` clause in a join whose condition uses equality:
+
+	SELECT * FROM Members INNER JOIN FavoriteCategories ON Members.id = FavoriteCategories.member_id
+	
+Non-equijoins use other comparators:
+
+	SELECT Members.first_name, Members.last_name, YEAR(Members.date_of_birth) AS year_of_birth, Films.name, Films.year_released
+	FROM Members INNER JOIN Films
+	ON YEAR(Members.date_of_birth) <= Films.year_released
+	WHERE Members.id = 1
+	
+# Null Values:
+
+A value is null if it is unknown. `NOT NULL` constraints can be set on a field, ensuring that no valid entries make it into the database with unknown quantities in these fields, but we can't always rely on that.
+
+It's important to understand this philosophical distinction of `null` as `unknown`. `Null` is not `nothing`. It is a value that has yet to be populated. A user may have an eye color that is `null` (unknown), but not a non-existent eye color. 
+
+## Searching with Null Values
+
+Null values will not show up in comparisons, because their values are unknown. The search:
+
+	SELECT * FROM Members WHERE date_of_birth >= '2000-01-01' AND date_of_birth <= '2000-01-01';
+	
+Would seem to select all fields. But that's only true if that values in the `date_of_birth` field are all known. To ensure `null` values are also returned:
+
+	OR date_of_birth IS NULL;
+	
+The `IS NULL` operator checks for unknown values in a field. 
+	
+
+	
