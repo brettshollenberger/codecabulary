@@ -16,6 +16,10 @@
 
 	SHOW TABLES
 	
+# Insert with Select
+
+	INSERT INTO TABLE NewMembers SELECT * FROM Members WHERE date_of_joining >= '2014-01-31';
+	
 # Querying:
 
 ## DISTINCT:
@@ -125,6 +129,25 @@ Would seem to select all fields. But that's only true if that values in the `dat
 	OR date_of_birth IS NULL;
 	
 The `IS NULL` operator checks for unknown values in a field. 
+
+# Constraints:
+
+## UNIQUE:
+
+A field can be specified as requiring a unique key:
+
+	id integer NOT NULL UNIQUE AUTO_INCREMENT Primary Key
+	
+Or a combination of fields can be specified as requiring a unique combination between them:
+
+	CONSTRAINT col2_and_col3_uniqueness UNIQUE(col2, col3)
+	
+Using ALTER TABLE:
+
+	ADD CONSTRAINT ...
+	DROP INDEX ... # constraint
+	
+
 	
 
 	
