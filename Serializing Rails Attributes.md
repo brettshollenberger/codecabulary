@@ -19,3 +19,11 @@ Additionally, we can set a default for our accessor, since this object will be `
 			self[:preferences] || self[:preferences] = {}
 		end
 	end
+
+## ActiveRecord::Store
+
+Alternately, you can perform all of this at once with the use of the `store` method:
+	
+	class User < ActiveRecord::Base
+		store :preferences
+	end
