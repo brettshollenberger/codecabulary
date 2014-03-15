@@ -1,0 +1,3 @@
+# Statistical Multiplexing
+
+In general, multiplexing describes "resource sharing," or our ability to split up resources between users rather than dedicate individual resources to individual users. Office workers often share a printer because not all users will need to use a printer at the same time. How well the shared model works depends on the number of users that might potentially print at a given time, the worst possible probability that any person will be printing at a given moment, and the consequences of multiple people attempting to use a resource at the same time. 
