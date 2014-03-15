@@ -22,11 +22,19 @@ It's a very useful feature to keep you from running into a terminal to test out 
 
 ## Select a ruby text objects
 
+var vir
+
 ## Select text object all
+
+ae
 
 ## tabular.vim
 
+tt, te, tb, <leader>a /{
+
 ## commentary.vim
+
+gc, gc motion
 
 Tim Pope's commentary.vim allows us to comment out lines of code in all languages supported by Vim. Using `gc` and a motion, such as `ap`, we can comment out areas like paragraphs.
 
@@ -43,3 +51,7 @@ We can enter Insert Normal mode by pressing `ctrl-o`
 ## Backing up over misspelled words
 
 Control w
+
+## Re-select previous paste
+
+`gp`
