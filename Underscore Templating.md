@@ -42,4 +42,4 @@ That's pretty easy, right?
 	
 	$('#new-person').on('submit', addPerson);
 
-http://jsfiddle.net/8E3wD/5/
+http://jsfiddle.net/6NNfS/9/
