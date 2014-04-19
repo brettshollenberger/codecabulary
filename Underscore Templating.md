@@ -43,3 +43,4 @@ That's pretty easy, right?
 	$('#new-person').on('submit', addPerson);
 
 http://jsfiddle.net/6NNfS/9/
+http://jsfiddle.net/8Z94Z/6/
