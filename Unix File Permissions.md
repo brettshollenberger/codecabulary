@@ -63,7 +63,17 @@ Often, you'll see permissions described using a numerical shorthand, such as 755
 	group r-x => 4 + 1 = 5
 	others r-x => 4 + 1 = 5
 	
+## Setting Default Modes
 
+Default modes can be set using `umask`. `umask` tends to be set in `/etc/profile` (loaded for all users), `/etc/.bashrc`, (also loaded for all users), or on a user-specific basis in that user's files (e.g. `~/.profile` or `~/.bashrc`). `umask` _masks_ file permissions (it is subtractive), so:
+
+	# umask masks file permissions (is subtractive)
+	umask 022 => (7 - 0) (7 - 2) (7 - 2) => 755
+	umask 222 => (7 - 2) (7 - 2) (7 - 2) => 555
+	
+By default, `umask` is set to `022`. 
+	
+	
 	
 	
 
