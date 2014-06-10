@@ -58,9 +58,13 @@ Ruby responds to this question with the following answers:
 
 * A class definition
 * A module definition
-* A method
+* A method definition
 
-You probably already guessed a class definition (as we saw above), and a class is actually an instantiatable module, so it makes sense that a module is included here too (modules are also primarily used for namespacing in Ruby). It may surprise you to see methods included, but blocks not to be. After all, both are callable things in Ruby; they're pretty similar, right? But, unlike methods, which tend to be bound to objects, procs are happy to exist on their own. Since they exist on their own, and code must run in some context (otherwise it wouldn't be very useful, would it?), blocks inherit their surrounding context:
+Modules are the primarily namespacing tool in Ruby by convention. If you want to imply to other programmers that you want to group several concepts, the best way to do so in Ruby is with a module. The module is like the directory in our file system example, so it's a good choice to ensure it creates its own scope by default. As we'll see later, opening a module doesn't _have_ to create a new scope, and we have the tools to ensure it doesn't, just like we could say that "this addendum is a part of the same legal document, and everything declared before still applies." In fact, every choice about what "should" create a new context is just a "sane default" put in place by the creators and maintainers of Ruby, just like how by default we would assume that a new document is not an addendum to some previous document, and has its own context. 
+
+You probably already guessed that a class definition creates a new context (as we saw above). A class is actually an instantiatable module--a module with a few additional methods that make it easy to create objects out of the namespace (`new`, `allocate`, and `superclass`). So it makes sense that if a module is a new context, so too is a class. This is both a convenience and a guide to writing good code; we assume when creating a class that the class will entirely manage its own concerns, and making classes create their own context by default also encourages this programming practice, which is easier to understand for new developers entering a project. 
+
+It may surprise you to see methods included on our list, but not blocks. After all, both are callable things in Ruby; they're pretty similar, right? This choice probably derives from differences in that way methods and blocks are used. Methods are always bound to classes (even in the case when they're declared in the global namespace--in that case they're implicitly bound to the `Object` class), but procs exist on their own. Since they exist on their own, and code must run in some context, blocks inherit their surrounding context:
 
 	def my_method
 		x = "Goodbye"
@@ -257,7 +261,41 @@ Since `fun` isn't encapsulated within the `Fun` module, it's easy to end up over
 
 ## Clean Rooms
 
+The problem: We have a complex application, with many possible variables in scope. We want to load code into a new context, evaluate it, and avoid interfering with the rest of the application.
 
+The solution: We create a new object whose sole purpose is to act as an environment in which to evaluate our blocks.
+
+	Object.new.instance_eval do
+		@sky_height = 100
+		puts "Sky is falling" if @sky_height < 150
+	end
+	
+Rather than create a new `@sky_height` variable in the parent context, or alter an existing variable, the clean room shields our code from the rest of the program, and the rest of the program from our code. 
+
+If it seems weird to evaluate code "inside an object," prepare for a bit of a surprise: Ruby _always_ evaluates code in the context of an object. The global context is called `main`, and it's actually an instance of `Object`, the same class we instantiated to create a clean room for our blocks. Don't believe me? Fire up an `irb` session:
+
+	self.class # => Object
+	
+	@fun = true
+	self.instance_variable_get(:@fun) # => true
+	
+	def fun?
+		@fun
+	end
+	
+	self.send :fun? # => true
+	
+One potentially unexpected side effect of this truth is that, since methods are defined on classes and not objects, that defining a method in the global namespace actually makes it a private method of `Object`, and thus all classes in the program:
+
+	def fun?
+		true
+	end
+	
+	class Party; end
+	
+	party = Party.new
+	
+	party.send :fun? # => true
 
 
 
