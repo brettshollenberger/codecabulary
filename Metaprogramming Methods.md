@@ -93,7 +93,6 @@ In the Javascript example of dynamic dispatch, above, we've actually already see
 			["draft", "published", "archived"]
 		end
 		
-
 		self.statuses.each do |status|
 			define_method "#{status}?" do
 				@status == status
