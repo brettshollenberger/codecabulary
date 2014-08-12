@@ -1,0 +1,13 @@
+# Composite Literal Syntax
+
+Imagine you have a sheet of graph paper meant to hold your computer program. Each box can contain one simple item--a single character or number. How would you build a big program out of these tiny elements? 
+
+An intuitive approach would be to begin grouping the small pieces. If we want arrays, we mark out a sequence of boxes, and begin filling in the values one box at a time. Since we want to remember the array concept--including its current length and total capacity, we create another simple structure: one cell points to the start of the array; one cell contains the numeric length; one cell contains the capacity. 
+
+Strings can be represented in much the same way as arrays--except without the capacity. Why don't we want a capacity? First, we don't know how long the ultimate string will be. Strings have a willingness to change fairly often. Second, and related to the first point--we need an intelligent way to fill in our boxes in our sheet of graph paper. If we marked out a string, and then jumped down a few rows just to give the string some more breathing room--what happens when we run out of space? Do we start coming back and filling in the unfilled boxes? That's a sure-fire way to have technically enough squares to add some new values, but not enough contiguous squares to fill in the new array we want. 
+
+Instead, we mark out a space for our string. This space will never change. If we want to append something new to the string, we'll copy the old one, plus the new one, and put the joined string at the end of our set of boxes. If we have no more need for the old string (maybe the new string has totally come to replace it), then we'll erase the old string from our sheet of paper, freeing up those old boxes. One important reason we do this is so that we can make other cheap references to our original string without fear of it changing out from under us. 
+
+What happens, if for example, we have several slices of the original string lying around? We started with the string "hello world," and then made a slice to reference "hello" and one to reference "world." Then we changed "world" to "friend." Now our "world" slice refers to "friend." Whoops! That's not what we want at all. What we want is for our original string to be immutable. It will never change from under us. Instead, we make copies, and when nothing else refers to our original string anymore, we know that we're free to erase it. 
+
+This is composite literal syntax in a nutshell--our ability to arrange and rearrange simple units into more complex structures that more closely resemble thought. 
