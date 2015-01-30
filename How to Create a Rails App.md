@@ -11,9 +11,13 @@ First there was “rails new Foo” -- the next thing you know you’re adding �
 
 At Launch Academy we tend to use postgresql. So to save yourself a little extra work, make sure you include the --database flag when executing rails new.
 
-#### 2)  remove public/index
+#### 2)  remove turbolinks in Rails 4.x -- for Rails 3.x, make sure you remove the public/index.html
 
-Don’t be a noob. Remove that public index file!
+How to remove Turbolinks:
+
+1. Remove the gem 'turbolinks' line from your Gemfile.
+2. Remove the //= require turbolinks from your app/assets/javascripts/application.js.
+3. Remove the two "data-turbolinks-track" => true hash key/value pairs from your app/views/layouts/application.html.erb.
 
 #### 3) git init
 
@@ -109,6 +113,17 @@ This command generates the test environment that Rspec uses. You’ll need to re
 #### 17) git add * ; git commit -m ‘message’
 
 Don’t forget to commit after you Migrate!
+
+#### Extras: add database.yml and secret_token.rb to your .gitginore
+
+This is just a good habit to get into. When others fork your repos, having special database settings can give them a headache
+when trying to check out your code. Do them a favor and tell git to ignore that file. Another file to add is the secret_token.rb
+-- it's called that for a reason! It's supposed to be secret! Protect your users by hiding this file.
+
+In your .gitignore file add the lines:
+    
+    /config/database.yml
+    /config/secret_token.rb
 
 ===
 
