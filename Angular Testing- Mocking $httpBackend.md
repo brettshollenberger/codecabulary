@@ -91,7 +91,7 @@ Our respond function can take two forms: one replies with a response code, respo
 		// Or only return data
 		.respond("Fail" );
 		// Or only headers
-		.respond({'X-RESPONSE' , 'Failure' });
+		.respond({'X-RESPONSE': 'Failure' });
 		
 	 $httpBackend.expectGET("/v1/api/current_user" )
 		// Respond with a 200 status code
